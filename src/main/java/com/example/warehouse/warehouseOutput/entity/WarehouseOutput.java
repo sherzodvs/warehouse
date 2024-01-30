@@ -1,5 +1,6 @@
 package com.example.warehouse.warehouseOutput.entity;
 
+import com.example.warehouse.common.AbsClass;
 import com.example.warehouse.currancyType.entity.CurrancyType;
 import com.example.warehouse.product.entity.Product;
 import com.example.warehouse.warehouse.entity.Warehouse;
@@ -18,7 +19,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Data
 @Entity
-public class WarehouseOutput {
+public class WarehouseOutput extends AbsClass {
     @Id
     private Long id;
 

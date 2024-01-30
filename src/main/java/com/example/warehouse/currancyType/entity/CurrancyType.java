@@ -1,5 +1,6 @@
 package com.example.warehouse.currancyType.entity;
 
+import com.example.warehouse.common.AbsClass;
 import com.example.warehouse.warehouseCost.entity.WarehouseCost;
 import com.example.warehouse.warehouseOutput.entity.WarehouseOutput;
 import jakarta.persistence.*;
@@ -13,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity
-public class CurrancyType {
+public class CurrancyType extends AbsClass {
     @Id
     private Long id;
     private String name;

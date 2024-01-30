@@ -1,5 +1,6 @@
 package com.example.warehouse.taminotchi.entity;
 
+import com.example.warehouse.common.AbsClass;
 import com.example.warehouse.warehouseCost.entity.WarehouseCost;
 import com.example.warehouse.worker.entity.Worker;
 import jakarta.persistence.Entity;
@@ -15,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity
-public class Taminotchi {
+public class Taminotchi extends AbsClass {
     @Id
     private Long id;
     private String name;

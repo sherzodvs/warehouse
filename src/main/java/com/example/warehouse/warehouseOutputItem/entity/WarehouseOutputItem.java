@@ -1,7 +1,7 @@
 package com.example.warehouse.warehouseOutputItem.entity;
 
+import com.example.warehouse.common.AbsClass;
 import com.example.warehouse.product.entity.Product;
-import com.example.warehouse.warehouseCost.entity.WarehouseCost;
 import com.example.warehouse.warehouseOutput.entity.WarehouseOutput;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-public class WarehouseOutputItem {
+public class WarehouseOutputItem extends AbsClass {
     @Id
     private Long id;
 

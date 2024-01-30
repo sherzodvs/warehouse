@@ -1,5 +1,7 @@
 package com.example.warehouse.product.entity;
+
 import com.example.warehouse.categoty.entity.Category;
+import com.example.warehouse.common.AbsClass;
 import com.example.warehouse.unit.entity.Unit;
 import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
 import com.example.warehouse.warehouseOutputItem.entity.WarehouseOutputItem;
@@ -7,13 +9,14 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
-public class Product {
+public class Product extends AbsClass {
     @Id
     private Long id;
     private String name;
@@ -33,9 +36,8 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<WarehouseCostItem> warehouseCostItems;
 
- @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product")
     private List<WarehouseOutputItem> warehouseOutputItems;
-
 
 
 }

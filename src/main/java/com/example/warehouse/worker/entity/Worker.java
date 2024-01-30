@@ -1,5 +1,6 @@
 package com.example.warehouse.worker.entity;
 
+import com.example.warehouse.common.AbsClass;
 import com.example.warehouse.warehouse.entity.Warehouse;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-public class Worker {
+public class Worker extends AbsClass {
     @Id
     private Long id;
     private String name;

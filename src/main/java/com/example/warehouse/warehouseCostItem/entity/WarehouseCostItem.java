@@ -1,5 +1,6 @@
 package com.example.warehouse.warehouseCostItem.entity;
 
+import com.example.warehouse.common.AbsClass;
 import com.example.warehouse.product.entity.Product;
 import com.example.warehouse.warehouseCost.entity.WarehouseCost;
 import jakarta.persistence.Entity;
@@ -16,7 +17,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Data
 @Entity
-public class WarehouseCostItem {
+public class WarehouseCostItem extends AbsClass {
     @Id
     private Long id;
 
