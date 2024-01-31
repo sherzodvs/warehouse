@@ -1,8 +1,7 @@
 package com.example.warehouse.taminotchi.entity;
 
-import com.example.warehouse.common.AbsClass;
-import com.example.warehouse.warehouseCost.entity.WarehouseCost;
-import com.example.warehouse.worker.entity.Worker;
+import com.example.warehouse.common.abstractClass.AbsClass;
+import com.example.warehouse.warehouseCost.WarehouseCost;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;

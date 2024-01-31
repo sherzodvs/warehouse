@@ -1,11 +1,9 @@
-package com.example.warehouse.warehouseOutput.entity;
+package com.example.warehouse.warehouseOutput;
 
-import com.example.warehouse.common.AbsClass;
+import com.example.warehouse.common.abstractClass.AbsClass;
 import com.example.warehouse.currancyType.entity.CurrancyType;
-import com.example.warehouse.product.entity.Product;
 import com.example.warehouse.warehouse.entity.Warehouse;
-import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
-import com.example.warehouse.warehouseOutputItem.entity.WarehouseOutputItem;
+import com.example.warehouse.warehouseOutputItem.WarehouseOutputItem;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,7 +11,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor

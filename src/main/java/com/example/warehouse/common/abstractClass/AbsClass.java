@@ -1,4 +1,4 @@
-package com.example.warehouse.common;
+package com.example.warehouse.common.abstractClass;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

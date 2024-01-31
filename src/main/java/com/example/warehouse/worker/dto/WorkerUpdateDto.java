@@ -1,8 +1,6 @@
-package com.example.warehouse.worker.entity;
+package com.example.warehouse.worker.dto;
 
-import com.example.warehouse.common.abstractClass.AbsClass;
 import com.example.warehouse.warehouse.entity.Warehouse;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,20 +8,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity
-public class Worker extends AbsClass {
-    @Id
-    private Long id;
+public class WorkerUpdateDto {
+
     private String name;
     private String surname;
     private String phoneNumber;
     private String userName;
     private String password;
-
-    @ManyToOne
-    @JoinColumn(name = "warehouse_id")
-    private Warehouse warehouse;
-
+    private Warehouse warehouse_id;
 
 
 }

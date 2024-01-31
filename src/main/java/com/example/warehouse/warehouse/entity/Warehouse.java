@@ -1,8 +1,8 @@
 package com.example.warehouse.warehouse.entity;
 
-import com.example.warehouse.common.AbsClass;
-import com.example.warehouse.warehouseCost.entity.WarehouseCost;
-import com.example.warehouse.warehouseOutput.entity.WarehouseOutput;
+import com.example.warehouse.common.abstractClass.AbsClass;
+import com.example.warehouse.warehouseCost.WarehouseCost;
+import com.example.warehouse.warehouseOutput.WarehouseOutput;
 import com.example.warehouse.worker.entity.Worker;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

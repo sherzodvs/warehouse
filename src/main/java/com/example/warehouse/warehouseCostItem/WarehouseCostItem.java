@@ -1,8 +1,8 @@
-package com.example.warehouse.warehouseOutputItem.entity;
+package com.example.warehouse.warehouseCostItem;
 
-import com.example.warehouse.common.AbsClass;
+import com.example.warehouse.common.abstractClass.AbsClass;
 import com.example.warehouse.product.entity.Product;
-import com.example.warehouse.warehouseOutput.entity.WarehouseOutput;
+import com.example.warehouse.warehouseCost.WarehouseCost;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -11,11 +11,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
-public class WarehouseOutputItem extends AbsClass {
+public class WarehouseCostItem extends AbsClass {
     @Id
     private Long id;
 
@@ -28,8 +30,11 @@ public class WarehouseOutputItem extends AbsClass {
     private double product_price;
 
 
+    private LocalDate expiry_date;
+
     @ManyToOne
-    @JoinColumn(name = "warehouseOutput_id")
-    private WarehouseOutput warehouseOutput;
+    @JoinColumn(name = "warehouseCost_id")
+    private WarehouseCost warehouseCost;
+
 
 }
