@@ -16,8 +16,7 @@ import java.util.List;
 @Data
 @Entity
 public class Unit extends AbsClass {
-    @Id
-    private Long id;
+
     private String name;
     private Boolean status;
 

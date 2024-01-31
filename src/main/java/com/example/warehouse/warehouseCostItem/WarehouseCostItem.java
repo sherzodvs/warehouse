@@ -18,8 +18,7 @@ import java.time.LocalDate;
 @Data
 @Entity
 public class WarehouseCostItem extends AbsClass {
-    @Id
-    private Long id;
+
 
     @ManyToOne
     @JoinColumn(name = "product_id")

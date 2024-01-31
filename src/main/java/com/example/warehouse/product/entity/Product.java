@@ -17,8 +17,7 @@ import java.util.List;
 @Data
 @Entity
 public class Product extends AbsClass {
-    @Id
-    private Long id;
+
     private String name;
 
     @ManyToOne

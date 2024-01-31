@@ -18,8 +18,6 @@ import java.util.List;
 @Data
 @Entity
 public class WarehouseCost extends AbsClass {
-    @Id
-    private Long id;
 
     private LocalDate date;
 

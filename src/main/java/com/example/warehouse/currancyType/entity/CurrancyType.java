@@ -15,8 +15,7 @@ import java.util.List;
 @Data
 @Entity
 public class CurrancyType extends AbsClass {
-    @Id
-    private Long id;
+
     private String name;
     private Boolean status;
 

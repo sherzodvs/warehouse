@@ -16,8 +16,6 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 public class WarehouseOutputItem extends AbsClass {
-    @Id
-    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "product_id")

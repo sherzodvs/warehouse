@@ -12,8 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 public class Worker extends AbsClass {
-    @Id
-    private Long id;
+
     private String name;
     private String surname;
     private String phoneNumber;

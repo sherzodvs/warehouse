@@ -16,8 +16,7 @@ import java.util.List;
 @Data
 @Entity
 public class Taminotchi extends AbsClass {
-    @Id
-    private Long id;
+
     private String name;
     private String phoneNumber;
 

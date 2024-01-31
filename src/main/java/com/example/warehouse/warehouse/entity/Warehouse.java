@@ -17,8 +17,7 @@ import java.util.List;
 @Entity
 @Table(name = "warehouse")
 public class Warehouse extends AbsClass {
-    @Id
-    private Long id;
+
     private String name;
     private Boolean status;
 //
