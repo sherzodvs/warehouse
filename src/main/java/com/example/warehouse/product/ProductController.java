@@ -1,5 +1,8 @@
 package com.example.warehouse.product;
 
+import com.example.warehouse.categoty.dto.CategoryCreateDto;
+import com.example.warehouse.categoty.dto.CategoryResponseDto;
+import com.example.warehouse.product.dto.ProductCreateDto;
 import com.example.warehouse.product.dto.ProductPatchDto;
 import com.example.warehouse.product.dto.ProductResponseDto;
 import com.example.warehouse.product.dto.ProductUpdateDto;
@@ -17,6 +20,12 @@ import org.springframework.web.bind.annotation.*;
 public class ProductController {
 
     private final ProductService service;
+
+    @PostMapping
+    public ResponseEntity<ProductResponseDto> create(@RequestBody @Valid ProductCreateDto createDto) {
+        ProductResponseDto categoryResponseDto = service.create(createDto);
+        return ResponseEntity.ok(categoryResponseDto);
+    }
     @GetMapping
     public ResponseEntity<Page<ProductResponseDto>> getAll(Pageable pageable, @RequestParam(required = false) String predicate) {
         Page<ProductResponseDto> all = service.getAll(pageable, predicate);

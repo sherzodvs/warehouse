@@ -1,5 +1,8 @@
 package com.example.warehouse.currancyType;
 
+import com.example.warehouse.categoty.dto.CategoryCreateDto;
+import com.example.warehouse.categoty.dto.CategoryResponseDto;
+import com.example.warehouse.currancyType.dto.CurrancyTypeCreateDto;
 import com.example.warehouse.currancyType.dto.CurrancyTypePatchDto;
 import com.example.warehouse.currancyType.dto.CurrancyTypeResponseDto;
 import com.example.warehouse.currancyType.dto.CurrancyTypeUpdateDto;
@@ -17,6 +20,12 @@ import org.springframework.web.bind.annotation.*;
 public class CurrancyTypeController {
 
     private final CurrancyTypeService service;
+    @PostMapping
+    public ResponseEntity<CurrancyTypeResponseDto> create(@RequestBody @Valid CurrancyTypeCreateDto createDto) {
+        CurrancyTypeResponseDto categoryResponseDto = service.create(createDto);
+        return ResponseEntity.ok(categoryResponseDto);
+    }
+
     @GetMapping
     public ResponseEntity<Page<CurrancyTypeResponseDto>> getAll(Pageable pageable, @RequestParam(required = false) String predicate) {
         Page<CurrancyTypeResponseDto> all = service.getAll(pageable, predicate);

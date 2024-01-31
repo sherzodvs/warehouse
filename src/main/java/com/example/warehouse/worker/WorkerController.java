@@ -1,5 +1,6 @@
 package com.example.warehouse.worker;
 
+import com.example.warehouse.worker.dto.WorkerCreateDto;
 import com.example.warehouse.worker.dto.WorkerPatchDto;
 import com.example.warehouse.worker.dto.WorkerResponseDto;
 import com.example.warehouse.worker.dto.WorkerUpdateDto;
@@ -17,6 +18,12 @@ import org.springframework.web.bind.annotation.*;
 public class WorkerController {
 
     private final WorkerService service;
+
+    @PostMapping
+    public ResponseEntity<WorkerResponseDto> create(@RequestBody @Valid WorkerCreateDto createDto) {
+        WorkerResponseDto categoryResponseDto = service.create(createDto);
+        return ResponseEntity.ok(categoryResponseDto);
+    }
     @GetMapping
     public ResponseEntity<Page<WorkerResponseDto>> getAll(Pageable pageable, @RequestParam(required = false) String predicate) {
         Page<WorkerResponseDto> all = service.getAll(pageable, predicate);

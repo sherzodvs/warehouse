@@ -1,5 +1,8 @@
 package com.example.warehouse.taminotchi;
 
+import com.example.warehouse.product.dto.ProductCreateDto;
+import com.example.warehouse.product.dto.ProductResponseDto;
+import com.example.warehouse.taminotchi.dto.TaminotchiCreateDto;
 import com.example.warehouse.taminotchi.dto.TaminotchiPatchDto;
 import com.example.warehouse.taminotchi.dto.TaminotchiResponseDto;
 import com.example.warehouse.taminotchi.dto.TaminotchiUpdateDto;
@@ -17,6 +20,12 @@ import org.springframework.web.bind.annotation.*;
 public class TaminotchiController {
 
     private final TaminotchiService service;
+
+    @PostMapping
+    public ResponseEntity<TaminotchiResponseDto> create(@RequestBody @Valid TaminotchiCreateDto createDto) {
+        TaminotchiResponseDto categoryResponseDto = service.create(createDto);
+        return ResponseEntity.ok(categoryResponseDto);
+    }
     @GetMapping
     public ResponseEntity<Page<TaminotchiResponseDto>> getAll(Pageable pageable, @RequestParam(required = false) String predicate) {
         Page<TaminotchiResponseDto> all = service.getAll(pageable, predicate);

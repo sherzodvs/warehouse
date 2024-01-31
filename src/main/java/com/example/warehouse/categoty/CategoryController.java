@@ -1,5 +1,6 @@
 package com.example.warehouse.categoty;
 
+import com.example.warehouse.categoty.dto.CategoryCreateDto;
 import com.example.warehouse.categoty.dto.CategoryPatchDto;
 import com.example.warehouse.categoty.dto.CategoryResponseDto;
 import com.example.warehouse.categoty.dto.CategoryUpdateDto;
@@ -17,6 +18,12 @@ import org.springframework.web.bind.annotation.*;
 public class CategoryController {
 
     private final CategoryService service;
+    @PostMapping
+    public ResponseEntity<CategoryResponseDto> createCategory(@RequestBody @Valid CategoryCreateDto categoryCreateDto) {
+        CategoryResponseDto categoryResponseDto = service.create(categoryCreateDto);
+        return ResponseEntity.ok(categoryResponseDto);
+    }
+
     @GetMapping
     public ResponseEntity<Page<CategoryResponseDto>> getAll(Pageable pageable, @RequestParam(required = false) String predicate) {
         Page<CategoryResponseDto> all = service.getAll(pageable, predicate);

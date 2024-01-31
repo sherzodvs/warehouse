@@ -1,5 +1,8 @@
 package com.example.warehouse.unit;
 
+import com.example.warehouse.currancyType.dto.CurrancyTypeCreateDto;
+import com.example.warehouse.currancyType.dto.CurrancyTypeResponseDto;
+import com.example.warehouse.unit.dto.UnitCreateDto;
 import com.example.warehouse.unit.dto.UnitPatchDto;
 import com.example.warehouse.unit.dto.UnitResponseDto;
 import com.example.warehouse.unit.dto.UnitUpdateDto;
@@ -17,6 +20,11 @@ import org.springframework.web.bind.annotation.*;
 public class UnitController {
 
     private final UnitService service;
+    @PostMapping
+    public ResponseEntity<UnitResponseDto> create(@RequestBody @Valid UnitCreateDto createDto) {
+        UnitResponseDto categoryResponseDto = service.create(createDto);
+        return ResponseEntity.ok(categoryResponseDto);
+    }
     @GetMapping
     public ResponseEntity<Page<UnitResponseDto>> getAll(Pageable pageable, @RequestParam(required = false) String predicate) {
         Page<UnitResponseDto> all = service.getAll(pageable, predicate);
