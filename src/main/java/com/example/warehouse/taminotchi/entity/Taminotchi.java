@@ -21,7 +21,5 @@ public class Taminotchi extends AbsClass {
     private String name;
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "taminotchi")
-    private List<WarehouseCost> warehouseCosts;
 
 }

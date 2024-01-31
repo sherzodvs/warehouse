@@ -21,15 +21,15 @@ public class Warehouse extends AbsClass {
     private Long id;
     private String name;
     private Boolean status;
-
-    @OneToMany(mappedBy = "warehouse")
-    private List<Worker> workers;
-
-    @OneToMany(mappedBy = "warehouse")
-    private List<WarehouseCost> warehouseCosts;
-
-    @OneToMany(mappedBy = "warehouse")
-    private List<WarehouseOutput> warehouseOutputs;
-
+//
+//    @OneToMany(mappedBy = "warehouse")
+//    private List<Worker> workers;
+//
+//    @OneToMany(mappedBy = "warehouse")
+//    private List<WarehouseCost> warehouseCosts;
+//
+//    @OneToMany(mappedBy = "warehouse")
+//    private List<WarehouseOutput> warehouseOutputs;
+//
 
 }

@@ -39,8 +39,8 @@ public class WarehouseCost extends AbsClass {
 
     private String costCode;
 
-    @OneToMany(mappedBy = "warehouseCost")
-    private List<WarehouseCostItem> warehouseCostItems;
+//    @OneToMany(mappedBy = "warehouseCost")
+//    private List<WarehouseCostItem> warehouseCostItems;
 
 
 }

@@ -16,14 +16,9 @@ import java.util.List;
 @Data
 @Entity
 public class Category extends AbsClass {
-    @Id
-    private Long id;
     private String name;
     private  Boolean status;
 
-
-    @OneToMany(mappedBy = "category")
-    private List<Product> products;
 
 
 }

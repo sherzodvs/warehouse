@@ -36,9 +36,6 @@ public class WarehouseOutput extends AbsClass {
 
     private String costCode;
 
-    @OneToMany(mappedBy = "warehouseOutput")
-    private List<WarehouseOutputItem> warehouseOutputItems;
-
 
 
 

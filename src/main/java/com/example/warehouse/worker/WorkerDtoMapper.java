@@ -4,8 +4,8 @@ import com.example.warehouse.worker.dto.WorkerCreateDto;
 import com.example.warehouse.worker.dto.WorkerResponseDto;
 import com.example.warehouse.worker.dto.WorkerUpdateDto;
 import com.example.warehouse.worker.entity.Worker;
-import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -21,7 +21,5 @@ public class Unit extends AbsClass {
     private String name;
     private Boolean status;
 
-    @OneToMany(mappedBy = "unit")
-    private List<Product> products;
 
 }

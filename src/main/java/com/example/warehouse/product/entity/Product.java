@@ -33,11 +33,5 @@ public class Product extends AbsClass {
     @JoinColumn(name = "unit_id")
     private Unit unit;
 
-    @OneToMany(mappedBy = "product")
-    private List<WarehouseCostItem> warehouseCostItems;
-
-    @OneToMany(mappedBy = "product")
-    private List<WarehouseOutputItem> warehouseOutputItems;
-
 
 }

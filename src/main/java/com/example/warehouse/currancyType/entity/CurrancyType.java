@@ -20,13 +20,6 @@ public class CurrancyType extends AbsClass {
     private String name;
     private Boolean status;
 
-    @OneToMany(mappedBy = "currancyType")
-    private List<WarehouseCost> warehouseCosts;
-
-
-    @OneToMany(mappedBy = "currancyType")
-    private List<WarehouseOutput> warehouseOutputs;
-
 
 
 }
