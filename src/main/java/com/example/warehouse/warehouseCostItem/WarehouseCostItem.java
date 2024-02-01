@@ -22,7 +22,7 @@ public class WarehouseCostItem extends AbsClass {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    private Product product;
+    private Product product_id;
 
     private double count;
 
