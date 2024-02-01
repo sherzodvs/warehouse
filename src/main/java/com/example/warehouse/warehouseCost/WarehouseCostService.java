@@ -7,13 +7,9 @@ import com.example.warehouse.product.entity.Product;
 import com.example.warehouse.taminotchi.TaminotchiRepository;
 import com.example.warehouse.taminotchi.entity.Taminotchi;
 import com.example.warehouse.unit.UnitRepository;
-import com.example.warehouse.warehouse.WarehouseDtoMapper;
 import com.example.warehouse.warehouse.WarehouseRepository;
-import com.example.warehouse.warehouse.dto.WarehouseCreateDto;
-import com.example.warehouse.warehouse.dto.WarehousePatchDto;
-import com.example.warehouse.warehouse.dto.WarehouseResponseDto;
-import com.example.warehouse.warehouse.dto.WarehouseUpdateDto;
 import com.example.warehouse.warehouse.entity.Warehouse;
+import com.example.warehouse.warehouseCost.entity.WarehouseCost;
 import com.example.warehouse.warehouseCostItem.WarehouseCostItem;
 import com.example.warehouse.warehouseCostItem.WarehouseCostItemRepository;
 import lombok.Getter;
@@ -33,7 +29,6 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
     private final WarehouseCostDtoMapper mapper;
     private final Class<WarehouseCost> entityClass = WarehouseCost.class;
     private final ModelMapper modelMapper;
-
     private final WarehouseRepository omborRepository;
     private final TaminotchiRepository taminotchiRepository;
     private final ProducteRepository mahsulotRepository;
@@ -63,7 +58,6 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
 
             WarehouseCostItem warehouseCostItem1 = new WarehouseCostItem();
             warehouseCostItem1.setProduct_id(mahsulot);
-            warehouseCostItem1.setWarehouseCost(warehouseCost);
             warehouseCostItem1.setProduct_price(warehouseCostItem.getProduct_price());
             warehouseCostItem1.setExpiry_date(warehouseCostItem.getExpiry_date());
 

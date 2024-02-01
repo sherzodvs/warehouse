@@ -2,16 +2,18 @@ package com.example.warehouse.warehouseCostItem;
 
 import com.example.warehouse.common.abstractClass.AbsClass;
 import com.example.warehouse.product.entity.Product;
-import com.example.warehouse.warehouseCost.WarehouseCost;
+import com.example.warehouse.warehouseCost.entity.WarehouseCost;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,9 +33,8 @@ public class WarehouseCostItem extends AbsClass {
 
     private LocalDate expiry_date;
 
-    @ManyToOne
-    @JoinColumn(name = "warehouseCost_id")
-    private WarehouseCost warehouseCost;
+    @ManyToMany(mappedBy = "warehouseCostItems")
+    private Set<WarehouseCost> warehouseCosts = new HashSet<>();
 
 
 }

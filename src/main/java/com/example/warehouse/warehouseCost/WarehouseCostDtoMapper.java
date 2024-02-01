@@ -1,9 +1,6 @@
 package com.example.warehouse.warehouseCost;
 import com.example.warehouse.common.service.GenericDtoMapper;
-import com.example.warehouse.warehouse.dto.WarehouseCreateDto;
-import com.example.warehouse.warehouse.dto.WarehouseResponseDto;
-import com.example.warehouse.warehouse.dto.WarehouseUpdateDto;
-import com.example.warehouse.warehouse.entity.Warehouse;
+import com.example.warehouse.warehouseCost.entity.WarehouseCost;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

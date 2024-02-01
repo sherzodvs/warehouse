@@ -1,15 +1,10 @@
 package com.example.warehouse.warehouse.entity;
 
 import com.example.warehouse.common.abstractClass.AbsClass;
-import com.example.warehouse.warehouseCost.WarehouseCost;
-import com.example.warehouse.warehouseOutput.WarehouseOutput;
-import com.example.warehouse.worker.entity.Worker;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor

@@ -1,4 +1,4 @@
-package com.example.warehouse.warehouseCost;
+package com.example.warehouse.warehouseCost.entity;
 
 import com.example.warehouse.common.abstractClass.AbsClass;
 import com.example.warehouse.currancyType.entity.CurrancyType;
@@ -11,7 +11,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -38,9 +40,12 @@ public class WarehouseCost extends AbsClass {
     private String costCode;
     private String invoiceNumber;
 
-
-//    @OneToMany(mappedBy = "warehouseCost")
-//    private List<WarehouseCostItem> warehouseCostItems;
-
+    @ManyToMany
+    @JoinTable(
+            name = "warehouseCosts_warehouseCostItems",
+            joinColumns = @JoinColumn(name = "warehouseCosts_id"),
+            inverseJoinColumns = @JoinColumn(name = "warehouseCostItems_id")
+    )
+    private Set<WarehouseCostItem> warehouseCostItems = new HashSet<>();
 
 }
