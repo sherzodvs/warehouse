@@ -1,10 +1,11 @@
 package com.example.warehouse.warehouseOutput;
 
 import com.example.warehouse.common.repository.GenericSpecificationRepository;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.warehouse.warehouseOutput.entity.WarehouseOutput;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WarehouseOutputRepository extends GenericSpecificationRepository<WarehouseOutput,Long> {
+
 
 }

@@ -3,11 +3,27 @@ package com.example.warehouse;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
+
 @SpringBootApplication
 public class WarehouseApplication {
+	public static String generateInvoiceNumber() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("Mdd");
+		String currentDate = dateFormat.format(new Date());
+		int randomPart = new Random().nextInt(900) + 100;
+		String invoiceNumber = currentDate + randomPart;
+		return invoiceNumber;
+	}
+
 
 	public static void main(String[] args) {
-		SpringApplication.run(WarehouseApplication.class, args);
+		System.out.println("Generated Invoice Number: " + generateInvoiceNumber());
+
+		//SpringApplication.run(WarehouseApplication.class, args);
 	}
 
 }

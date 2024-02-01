@@ -1,11 +1,8 @@
 package com.example.warehouse.warehouseCostItem;
 
 import com.example.warehouse.common.repository.GenericSpecificationRepository;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
 import org.springframework.stereotype.Repository;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @Repository
 public interface WarehouseCostItemRepository extends GenericSpecificationRepository<WarehouseCostItem, Long> {

@@ -4,7 +4,7 @@ import com.example.warehouse.common.abstractClass.AbsClass;
 import com.example.warehouse.currancyType.entity.CurrancyType;
 import com.example.warehouse.taminotchi.entity.Taminotchi;
 import com.example.warehouse.warehouse.entity.Warehouse;
-import com.example.warehouse.warehouseCostItem.WarehouseCostItem;
+import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor

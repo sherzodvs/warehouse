@@ -3,8 +3,6 @@ package com.example.warehouse.product.entity;
 import com.example.warehouse.categoty.entity.Category;
 import com.example.warehouse.common.abstractClass.AbsClass;
 import com.example.warehouse.unit.entity.Unit;
-import com.example.warehouse.warehouseCostItem.WarehouseCostItem;
-import com.example.warehouse.warehouseOutputItem.WarehouseOutputItem;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

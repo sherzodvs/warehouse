@@ -1,4 +1,4 @@
-package com.example.warehouse.warehouseCostItem;
+package com.example.warehouse.warehouseCostItem.entity;
 
 import com.example.warehouse.common.abstractClass.AbsClass;
 import com.example.warehouse.product.entity.Product;

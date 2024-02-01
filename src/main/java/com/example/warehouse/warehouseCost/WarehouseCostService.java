@@ -10,30 +10,31 @@ import com.example.warehouse.unit.UnitRepository;
 import com.example.warehouse.warehouse.WarehouseRepository;
 import com.example.warehouse.warehouse.entity.Warehouse;
 import com.example.warehouse.warehouseCost.entity.WarehouseCost;
-import com.example.warehouse.warehouseCostItem.WarehouseCostItem;
+import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
 import com.example.warehouse.warehouseCostItem.WarehouseCostItemRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 
 @Service
 @Getter
 @RequiredArgsConstructor
-public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long, WarehouseCost, WarehouseCost, WarehouseCost, WarehouseCost> {
+public class WarehouseCostService{
 
     private final WarehouseCostRepository repository;
-    private final WarehouseCostDtoMapper mapper;
     private final Class<WarehouseCost> entityClass = WarehouseCost.class;
-    private final ModelMapper modelMapper;
+
     private final WarehouseRepository omborRepository;
     private final TaminotchiRepository taminotchiRepository;
     private final ProducteRepository mahsulotRepository;
-    private final UnitRepository olchovBirlikRepository;
-    private final CurrancyTypeRepository valyutaTuriRepository;
     private final WarehouseCostItemRepository warehouseCostItemRepository;
     private final WarehouseCostRepository warehouseCostRepository;
 
@@ -49,7 +50,7 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
         warehouseCost.setDate(date);
         warehouseCost.setWarehouse(ombor);
         warehouseCost.setTaminotchi(taminotchi);
-        warehouseCost.setInvoiceNumber("INV" + System.currentTimeMillis()); // Invoice number
+        warehouseCost.setInvoiceNumber("Generated Invoice Number: " + generateInvoiceNumber()); // Invoice number
 
         for (WarehouseCostItem warehouseCostItem : products) {
             Product mahsulot = mahsulotRepository.findById(warehouseCostItem.getProduct_id().getId())
@@ -64,24 +65,21 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
             warehouseCostItemRepository.save(warehouseCostItem1);
         }
 
-
         return warehouseCostRepository.save(warehouseCost);
+
     }
 
 
-    @Override
-    protected WarehouseCost save(WarehouseCost createDto) {
-        WarehouseCost entity = mapper.toEntity(createDto);
-        return repository.save(entity);
+    public static String generateInvoiceNumber() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("Mdd");
+        String currentDate = dateFormat.format(new Date());
+        int randomPart = new Random().nextInt(900) + 100;
+        String invoiceNumber = currentDate + randomPart;
+        return invoiceNumber;
     }
 
 
 
-    @Override
-    protected WarehouseCost updateEntity(WarehouseCost updateDto, WarehouseCost warehouse) {
-        mapper.update(updateDto, warehouse);
-        return repository.save(warehouse);
-    }
 
 
 }

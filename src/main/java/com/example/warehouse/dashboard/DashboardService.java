@@ -1,16 +1,7 @@
 package com.example.warehouse.dashboard;
 
-import com.example.warehouse.warehouseCostItem.WarehouseCostItem;
-import com.example.warehouse.warehouseCostItem.WarehouseCostItemRepository;
-import com.example.warehouse.warehouseOutputItem.WarehouseOutItemRepository;
-import com.example.warehouse.warehouseOutputItem.WarehouseOutputItem;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
