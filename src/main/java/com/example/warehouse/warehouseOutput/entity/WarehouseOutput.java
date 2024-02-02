@@ -24,12 +24,12 @@ public class WarehouseOutput extends AbsClass {
 
     private LocalDate date;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "warehouse_id")
     private Warehouse warehouse;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "currancyType_id")
     private CurrancyType currancyType;
 

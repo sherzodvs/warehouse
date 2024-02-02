@@ -32,16 +32,16 @@ public class WarehouseCostService {
     private final WarehouseCostRepository repository;
     private final Class<WarehouseCost> entityClass = WarehouseCost.class;
 
-    private final WarehouseRepository omborRepository;
+    private final WarehouseRepository warehouseRepository;
     private final TaminotchiRepository taminotchiRepository;
-    private final ProducteRepository mahsulotRepository;
+    private final ProducteRepository producteRepository;
     private final WarehouseCostItemRepository warehouseCostItemRepository;
     private final WarehouseCostRepository warehouseCostRepository;
 
 
     public WarehouseCost warehouseCost(LocalDate date, Long omborId, Long taminotchiId,
                                        List<WarehouseCostItem> products) {
-        Warehouse ombor = omborRepository.findById(omborId).orElseThrow(() -> new RuntimeException("Warehouse not found"));
+        Warehouse ombor = warehouseRepository.findById(omborId).orElseThrow(() -> new RuntimeException("Warehouse not found"));
         Taminotchi taminotchi = taminotchiRepository.findById(taminotchiId)
                 .orElseThrow(() -> new RuntimeException("Supplier not found"));
 
@@ -52,7 +52,7 @@ public class WarehouseCostService {
         warehouseCost.setInvoiceNumber("Generated Invoice Number: " + generateInvoiceNumber()); // Invoice number
 
         for (WarehouseCostItem warehouseCostItem : products) {
-            Product product = mahsulotRepository.findById(warehouseCostItem.getProduct_id().getId())
+            Product product = producteRepository.findById(warehouseCostItem.getProduct_id().getId())
                     .orElseThrow(() -> new RuntimeException("Product not found"));
 
 

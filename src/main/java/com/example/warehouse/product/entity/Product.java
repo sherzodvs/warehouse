@@ -18,7 +18,7 @@ public class Product extends AbsClass {
 
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
 
@@ -26,7 +26,7 @@ public class Product extends AbsClass {
     private String accountingCode;
     private String productNumber;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "unit_id")
     private Unit unit;
 

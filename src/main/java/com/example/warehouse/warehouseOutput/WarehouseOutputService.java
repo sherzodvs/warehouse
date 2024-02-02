@@ -25,13 +25,8 @@ import java.util.Random;
 @Getter
 public class WarehouseOutputService {
     private final WarehouseOutputRepository repository;
-    private final WarehouseRepository omborRepository;
-    private final TaminotchiRepository taminotchiRepository;
-    private final ProducteRepository mahsulotRepository;
-    private final UnitRepository olchovBirlikRepository;
-    private final CurrancyTypeRepository valyutaTuriRepository;
-    private final WarehouseOutItemRepository warehouseCostItemRepository;
-    private final WarehouseOutputRepository warehouseCostRepository;
+    private final WarehouseRepository warehouseRepository;
+    private final ProducteRepository producteRepository;
 
 
     public WarehouseOutput create(WarehouseOutput omborChiqimDto) {
@@ -39,13 +34,13 @@ public class WarehouseOutputService {
         omborChiqim.setDate(omborChiqimDto.getDate());
         omborChiqim.setInvoiceNumber("Generated Invoice Number: " + generateInvoiceNumber());
 
-        Warehouse warehouse = omborRepository.findById(omborChiqimDto.getWarehouse().getId())
+        Warehouse warehouse = warehouseRepository.findById(omborChiqimDto.getWarehouse().getId())
                 .orElseThrow(() -> new RuntimeException("warehouse not fount"));
         omborChiqim.setWarehouse(warehouse);
 
 
         WarehouseOutputItem chiqimProduct = new WarehouseOutputItem();
-        Product product = mahsulotRepository.findById(chiqimProduct.getProduct().getId())
+        Product product = producteRepository.findById(chiqimProduct.getProduct().getId())
                 .orElseThrow(() -> new RuntimeException("Mahsulot topilmadi"));
 
         chiqimProduct.setProduct(product);
