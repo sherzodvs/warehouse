@@ -12,7 +12,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -29,8 +31,7 @@ public class WarehouseOutputItem extends AbsClass {
 
     private double product_price;
 
-
     @ManyToMany(mappedBy = "warehouseOutputItems")
-    private Set<WarehouseOutput> warehouseOutputs = new HashSet<>();
+    private List<WarehouseOutput> warehouseOutputs = new ArrayList<>();
 
 }

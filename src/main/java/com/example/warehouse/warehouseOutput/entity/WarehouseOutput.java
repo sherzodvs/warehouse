@@ -8,8 +8,12 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.w3c.dom.stylesheets.LinkStyle;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -36,7 +40,7 @@ public class WarehouseOutput extends AbsClass {
             joinColumns = @JoinColumn(name = "warehouseOutputs_id"),
             inverseJoinColumns = @JoinColumn(name = "warehouseOutputItems_id")
     )
-    private Set<WarehouseOutputItem> warehouseOutputItems = new HashSet<>();
+    private List<WarehouseOutputItem> warehouseOutputItems = new ArrayList<>();
 
 
     private String invoiceNumber;

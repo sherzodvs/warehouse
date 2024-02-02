@@ -3,11 +3,14 @@ package com.example.warehouse.warehouseOutputItem;
 import com.example.warehouse.common.repository.GenericSpecificationRepository;
 import com.example.warehouse.common.service.GenericCrudService;
 import com.example.warehouse.common.service.GenericDtoMapper;
+import com.example.warehouse.product.ProducteRepository;
+import com.example.warehouse.product.entity.Product;
 import com.example.warehouse.warehouse.WarehouseDtoMapper;
 import com.example.warehouse.warehouse.WarehouseRepository;
 import com.example.warehouse.warehouse.entity.Warehouse;
 import com.example.warehouse.warehouseCostItem.WarehouseCostItemRepository;
 import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
+import com.example.warehouse.warehouseOutput.entity.WarehouseOutput;
 import com.example.warehouse.warehouseOutputItem.entity.WarehouseOutputItem;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -33,5 +36,11 @@ public class WarehouseOutputItemService extends GenericCrudService<WarehouseOutp
     @Override
     protected WarehouseOutputItem updateEntity(WarehouseOutputItem warehouseOutputItem, WarehouseOutputItem warehouseOutputItem2) {
         mapper.update(warehouseOutputItem, warehouseOutputItem2);
-        return repository.save(warehouseOutputItem);    }
+        return repository.save(warehouseOutputItem);
+
+
+    }
+
+
+
 }

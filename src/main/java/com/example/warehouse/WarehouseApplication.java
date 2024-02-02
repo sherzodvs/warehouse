@@ -21,9 +21,8 @@ public class WarehouseApplication {
 
 
 	public static void main(String[] args) {
-		System.out.println("Generated Invoice Number: " + generateInvoiceNumber());
 
-		//SpringApplication.run(WarehouseApplication.class, args);
+	SpringApplication.run(WarehouseApplication.class, args);
 	}
 
 }
