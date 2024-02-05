@@ -1,11 +1,7 @@
 package com.example.warehouse.warehouseOutput;
 
-import com.example.warehouse.common.service.GenericCrudService;
-import com.example.warehouse.currancyType.CurrancyTypeRepository;
 import com.example.warehouse.product.ProducteRepository;
 import com.example.warehouse.product.entity.Product;
-import com.example.warehouse.taminotchi.TaminotchiRepository;
-import com.example.warehouse.unit.UnitRepository;
 import com.example.warehouse.warehouse.WarehouseRepository;
 import com.example.warehouse.warehouse.entity.Warehouse;
 import com.example.warehouse.warehouseOutput.entity.WarehouseOutput;
@@ -13,11 +9,12 @@ import com.example.warehouse.warehouseOutputItem.WarehouseOutItemRepository;
 import com.example.warehouse.warehouseOutputItem.entity.WarehouseOutputItem;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 @Service
@@ -25,6 +22,7 @@ import java.util.Random;
 @Getter
 public class WarehouseOutputService {
     private final WarehouseOutputRepository repository;
+    private final WarehouseOutItemRepository outItemRepository;
     private final WarehouseRepository warehouseRepository;
     private final ProducteRepository producteRepository;
 
@@ -50,6 +48,9 @@ public class WarehouseOutputService {
 
         return repository.save(omborChiqim);
     }
+
+
+
 
 
 

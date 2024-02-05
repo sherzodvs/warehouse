@@ -6,10 +6,17 @@ import com.example.warehouse.product.dto.ProductPatchDto;
 import com.example.warehouse.product.dto.ProductResponseDto;
 import com.example.warehouse.product.dto.ProductUpdateDto;
 import com.example.warehouse.product.entity.Product;
+import com.example.warehouse.warehouseCost.WarehouseCostRepository;
+import com.example.warehouse.warehouseCost.WarehouseCostService;
 import com.example.warehouse.warehouseCost.entity.WarehouseCost;
 import com.example.warehouse.warehouseCostItem.WarehouseCostItemRepository;
+import com.example.warehouse.warehouseCostItem.WarehouseCostItemService;
+import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
 import com.example.warehouse.warehouseOutput.WarehouseOutputRepository;
+import com.example.warehouse.warehouseOutput.WarehouseOutputService;
+import com.example.warehouse.warehouseOutput.entity.WarehouseOutput;
 import com.example.warehouse.warehouseOutputItem.WarehouseOutItemRepository;
+import com.example.warehouse.warehouseOutputItem.WarehouseOutputItemService;
 import com.example.warehouse.warehouseOutputItem.entity.WarehouseOutputItem;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +25,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -31,6 +39,14 @@ public class ProductService extends GenericCrudService<Product, Long, ProductCre
     private final ModelMapper modelMapper;
     private final WarehouseOutItemRepository warehouseOutProductRepository;
     private final WarehouseCostItemRepository warehouseCostItemRepository;
+    private final WarehouseCostRepository warehouseCostRepository;
+    private final WarehouseOutputItemService warehouseOutputItemService;
+    private final WarehouseCostItemService warehouseCostItemService;
+    private final WarehouseOutputService outputService;
+    private final WarehouseCostService costService;
+
+
+   static List<WarehouseCostItem> warehouseCostItems;
 
 
     @Override
@@ -44,6 +60,20 @@ public class ProductService extends GenericCrudService<Product, Long, ProductCre
         mapper.update(updateDto, product);
         return repository.save(product);
     }
+
+
+     // Yaroqlilik muddati yetib qolgan mahsulotlar soni
+    public int Product_ExpiryDate() {
+        int soni = 0;
+        LocalDate date = LocalDate.now();
+        for (WarehouseCostItem product : warehouseCostItems) {
+            if (product.getExpiry_date().isAfter(date)) {
+                soni++;
+            }
+        }
+        return soni;
+    }
+
 
 
     // Kunlik eng ko'p chiqim qilingan mahsulotlar
@@ -63,15 +93,46 @@ public class ProductService extends GenericCrudService<Product, Long, ProductCre
     }
 
 
+    //Kunlik eng ko’p chiqim qilingan mahsulotlar
+    public List<Product> getTopSellingProductsForDayOut(LocalDate date) {
+        List<WarehouseOutputItem> outputItemsForDay = warehouseOutputItemService.getWarehouseOutputItemsForDay(date);
+        return calculateTopSellingProductsOut(outputItemsForDay);
+    }
 
-//    public long getYaroqlilikMuddatiYetibQolganMahsulotlarSoni(LocalDate date) {
-//                return warehouseCostItemRepository.countByExpiry_dateGreaterThan(date);
-//
-//    }
+    private List<Product> calculateTopSellingProductsOut(List<WarehouseOutputItem> outputItems) {
+        Map<Product, Double> productQuantityMap = outputItems.stream()
+                .collect(Collectors.groupingBy(WarehouseOutputItem::getProduct,
+                        Collectors.summingDouble(WarehouseOutputItem:: getCount)));
+
+        return productQuantityMap.entrySet().stream()
+                .sorted(Map.Entry.<Product, Double>comparingByValue().reversed())
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+    }
 
 
 
+
+
+    //Kunlik eng ko’p krim qilingan mahsulotlar
+    public List<Product> getTopSellingProductsForDayCost(LocalDate date) {
+        List<WarehouseCostItem> costsForDay = warehouseCostItemService.getWarehouseCostItemsForDay(date);
+        return calculateTopSellingProductsCost(costsForDay);
+    }
+
+    private List<Product> calculateTopSellingProductsCost(List<WarehouseCostItem> costItems) {
+        Map<Product, Double> productQuantityMap = costItems.stream()
+                .collect(Collectors.groupingBy(WarehouseCostItem::getProduct_id,
+                        Collectors.summingDouble(WarehouseCostItem:: getCount)));
+
+        return productQuantityMap.entrySet().stream()
+                .sorted(Map.Entry.<Product, Double>comparingByValue().reversed())
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+    }
 
 
 }
+
+
 

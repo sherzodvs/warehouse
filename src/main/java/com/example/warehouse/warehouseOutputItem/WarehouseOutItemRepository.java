@@ -8,12 +8,16 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface WarehouseOutItemRepository  extends GenericSpecificationRepository<WarehouseOutputItem,Long> {
-  // long countByExpirationDateGreaterThan(LocalDate date);
+public interface WarehouseOutItemRepository extends GenericSpecificationRepository<WarehouseOutputItem, Long> {
+
+   // List<WarehouseOutputItem> findByWarehouseOutputs_Date(LocalDate date);
+//   List<WarehouseOutputItem> findByDate(LocalDate date);
+
+//    long countByExpirationDateGreaterThan(LocalDate date);
 
 
-    //findByWarehouseOut_Sana
-   // List<WarehouseOutputItem> findByWarehouseOutput_Date(LocalDate date);
 
 
 }
+
+

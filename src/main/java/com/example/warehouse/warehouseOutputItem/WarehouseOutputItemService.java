@@ -1,21 +1,16 @@
 package com.example.warehouse.warehouseOutputItem;
 
-import com.example.warehouse.common.repository.GenericSpecificationRepository;
 import com.example.warehouse.common.service.GenericCrudService;
-import com.example.warehouse.common.service.GenericDtoMapper;
-import com.example.warehouse.product.ProducteRepository;
-import com.example.warehouse.product.entity.Product;
-import com.example.warehouse.warehouse.WarehouseDtoMapper;
-import com.example.warehouse.warehouse.WarehouseRepository;
-import com.example.warehouse.warehouse.entity.Warehouse;
-import com.example.warehouse.warehouseCostItem.WarehouseCostItemRepository;
-import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
+import com.example.warehouse.warehouseOutput.WarehouseOutputRepository;
 import com.example.warehouse.warehouseOutput.entity.WarehouseOutput;
 import com.example.warehouse.warehouseOutputItem.entity.WarehouseOutputItem;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +21,8 @@ public class WarehouseOutputItemService extends GenericCrudService<WarehouseOutp
     private final WarehouseOutputItemDtoMapper mapper;
     private final Class<WarehouseOutputItem> entityClass = WarehouseOutputItem.class;
     private final ModelMapper modelMapper;
+    private final WarehouseOutputRepository outRepository;
+
 
 
     @Override
@@ -39,6 +36,9 @@ public class WarehouseOutputItemService extends GenericCrudService<WarehouseOutp
         return repository.save(warehouseOutputItem);
 
 
+    }
+    public List<WarehouseOutputItem> getWarehouseOutputItemsForDay(LocalDate date) {
+        return outRepository.findByDate(date);
     }
 
 

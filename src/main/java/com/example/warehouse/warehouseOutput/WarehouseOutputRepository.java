@@ -10,6 +10,7 @@ import java.util.List;
 
 @Repository
 public interface WarehouseOutputRepository extends GenericSpecificationRepository<WarehouseOutput,Long> {
+    List<WarehouseOutputItem> findByDate(LocalDate date);
 
 
 }
