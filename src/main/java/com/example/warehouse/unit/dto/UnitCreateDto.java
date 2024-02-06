@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class UnitCreateDto {
 
     private String name;
+    private  Boolean status;
 
 
 }

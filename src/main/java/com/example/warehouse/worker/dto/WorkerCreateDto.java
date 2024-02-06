@@ -1,5 +1,6 @@
 package com.example.warehouse.worker.dto;
 
+import com.example.warehouse.warehouse.dto.WarehouseResponseDto;
 import com.example.warehouse.warehouse.entity.Warehouse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,6 +16,6 @@ public class WorkerCreateDto {
     private String phoneNumber;
     private String userName;
     private String password;
-    private Warehouse warehouse_id;
+    private WarehouseResponseDto warehouse_id;
 
 }

@@ -11,6 +11,5 @@ public class UnitResponseDto {
 
     private Long id;
     private String name;
-    private Boolean status;
 
 }

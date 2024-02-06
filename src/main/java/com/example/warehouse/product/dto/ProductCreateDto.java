@@ -1,6 +1,8 @@
 package com.example.warehouse.product.dto;
 
+import com.example.warehouse.categoty.dto.CategoryResponseDto;
 import com.example.warehouse.categoty.entity.Category;
+import com.example.warehouse.unit.dto.UnitResponseDto;
 import com.example.warehouse.unit.entity.Unit;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +16,7 @@ import java.util.List;
 public class ProductCreateDto {
     private Long id;
     private String name;
-    private Category category_id;
+    private CategoryResponseDto category_id;
     private List<String> picture;
     private String productNumber;
     private Unit unit_id;

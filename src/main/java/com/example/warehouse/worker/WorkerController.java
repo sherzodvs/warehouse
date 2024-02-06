@@ -4,6 +4,7 @@ import com.example.warehouse.worker.dto.WorkerCreateDto;
 import com.example.warehouse.worker.dto.WorkerPatchDto;
 import com.example.warehouse.worker.dto.WorkerResponseDto;
 import com.example.warehouse.worker.dto.WorkerUpdateDto;
+import com.example.warehouse.worker.entity.Worker;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -20,10 +21,12 @@ public class WorkerController {
     private final WorkerService service;
 
     @PostMapping
-    public ResponseEntity<WorkerResponseDto> create(@RequestBody @Valid WorkerCreateDto createDto) {
-        WorkerResponseDto categoryResponseDto = service.create(createDto);
+    public ResponseEntity<Worker> create(@RequestBody @Valid WorkerCreateDto createDto) {
+        Worker categoryResponseDto = service.save(createDto);
         return ResponseEntity.ok(categoryResponseDto);
     }
+
+
     @GetMapping
     public ResponseEntity<Page<WorkerResponseDto>> getAll(Pageable pageable, @RequestParam(required = false) String predicate) {
         Page<WorkerResponseDto> all = service.getAll(pageable, predicate);

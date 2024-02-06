@@ -15,12 +15,9 @@ import java.util.List;
 @Data
 public class ProductResponseDto {
 
-    private Long id;
+
     private String name;
-    private Category category_id;
     private List<String> picture;
     private String accountingCode;
-    private String productNumber;
-    private Unit unit_id;
 
 }

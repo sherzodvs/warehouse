@@ -8,13 +8,10 @@ import com.example.warehouse.product.dto.ProductUpdateDto;
 import com.example.warehouse.product.entity.Product;
 import com.example.warehouse.warehouseCost.WarehouseCostRepository;
 import com.example.warehouse.warehouseCost.WarehouseCostService;
-import com.example.warehouse.warehouseCost.entity.WarehouseCost;
 import com.example.warehouse.warehouseCostItem.WarehouseCostItemRepository;
 import com.example.warehouse.warehouseCostItem.WarehouseCostItemService;
 import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
-import com.example.warehouse.warehouseOutput.WarehouseOutputRepository;
 import com.example.warehouse.warehouseOutput.WarehouseOutputService;
-import com.example.warehouse.warehouseOutput.entity.WarehouseOutput;
 import com.example.warehouse.warehouseOutputItem.WarehouseOutItemRepository;
 import com.example.warehouse.warehouseOutputItem.WarehouseOutputItemService;
 import com.example.warehouse.warehouseOutputItem.entity.WarehouseOutputItem;
@@ -67,7 +64,7 @@ public class ProductService extends GenericCrudService<Product, Long, ProductCre
         int soni = 0;
         LocalDate date = LocalDate.now();
         for (WarehouseCostItem product : warehouseCostItems) {
-            if (product.getExpiry_date().isAfter(date)) {
+            if (product.getExpiryDate().isAfter(date)) {
                 soni++;
             }
         }

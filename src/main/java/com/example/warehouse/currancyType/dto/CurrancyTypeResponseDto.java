@@ -11,9 +11,9 @@ public class CurrancyTypeResponseDto {
 
     private Long id;
 
-    private String name;
-
-    private  Boolean status;
+//    private String name;
+//
+//    private  Boolean status;
 
 
 }

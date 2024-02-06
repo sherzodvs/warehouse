@@ -25,10 +25,10 @@ public class WarehouseCostItem extends AbsClass {
 
     private double count;
 
-    private double product_price;
+    private double price;
 
 
-    private LocalDate expiry_date;
+    private LocalDate expiryDate;
 
     @ManyToMany(mappedBy = "warehouseCostItems")
     private Set<WarehouseCost> warehouseCosts = new HashSet<>();

@@ -58,8 +58,8 @@ public class WarehouseCostService {
 
             WarehouseCostItem warehouseCostItem1 = new WarehouseCostItem();
             warehouseCostItem1.setProduct_id(product);
-            warehouseCostItem1.setProduct_price(warehouseCostItem.getProduct_price());
-            warehouseCostItem1.setExpiry_date(warehouseCostItem.getExpiry_date());
+            warehouseCostItem1.setPrice(warehouseCostItem.getPrice());
+            warehouseCostItem1.setExpiryDate(warehouseCostItem.getExpiryDate());
 
             warehouseCostItemRepository.save(warehouseCostItem1);
             warehouseCost.getWarehouseCostItems().add(warehouseCostItem1);

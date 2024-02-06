@@ -1,6 +1,8 @@
 package com.example.warehouse.worker;
 
 import com.example.warehouse.common.service.GenericCrudService;
+import com.example.warehouse.warehouse.WarehouseRepository;
+import com.example.warehouse.warehouse.entity.Warehouse;
 import com.example.warehouse.worker.dto.WorkerCreateDto;
 import com.example.warehouse.worker.dto.WorkerPatchDto;
 import com.example.warehouse.worker.dto.WorkerResponseDto;
@@ -11,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 
 
 @Service
@@ -23,12 +26,26 @@ public class WorkerService extends GenericCrudService<Worker, Long, WorkerCreate
     private final Class<Worker> entityClass = Worker.class;
     private final ModelMapper modelMapper;
 
+    private final WarehouseRepository warehouseRepository;
 
-    @Override
-    protected Worker save(WorkerCreateDto createDto) {
-        Worker entity = mapper.toEntity(createDto);
-        return repository.save(entity);
+
+@Override
+    public Worker save(WorkerCreateDto workerDto) {
+        Worker worker = new Worker();
+        worker.setName(workerDto.getName());
+        worker.setSurname(workerDto.getSurname());
+        worker.setUserName(workerDto.getUserName());
+        worker.setPassword(workerDto.getPassword());
+        worker.setPhoneNumber(workerDto.getPhoneNumber());
+
+        Warehouse warehouse = warehouseRepository.findById(workerDto.getWarehouse_id().getId())
+                .orElseThrow(() -> new RuntimeException("Warehouse not found"));
+
+        worker.setWarehouse(warehouse);
+
+        return repository.save(worker);
     }
+
 
 
     @Override
@@ -36,10 +53,6 @@ public class WorkerService extends GenericCrudService<Worker, Long, WorkerCreate
         mapper.update(updateDto, worker);
         return repository.save(worker);
     }
-
-
-
-
 
 
 }

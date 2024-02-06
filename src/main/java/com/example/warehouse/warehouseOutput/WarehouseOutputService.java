@@ -53,6 +53,10 @@ public class WarehouseOutputService {
 
 
 
+    private WarehouseOutputRepository warehouseOutputItemRepository;
+
+    // Other dependencies and methods
+
 
 
 

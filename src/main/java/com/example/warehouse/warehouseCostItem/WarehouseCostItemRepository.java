@@ -14,8 +14,10 @@ public interface WarehouseCostItemRepository extends GenericSpecificationReposit
 //    //findByWarehouseIn_Sana
 //    List<WarehouseCostItem> findByWarehouseCost_Date(LocalDate date);
 //  long countByExpirationDateGreaterThan(LocalDate date);
+  long countByExpiryDateBefore(LocalDate expiryDate);
 
-
+//  List<WarehouseCostItem> findAllByCount(double count);
+//
 //  List<WarehouseOutputItem> findByWarehouseOutputs_Date(LocalDate date);
 
 }
