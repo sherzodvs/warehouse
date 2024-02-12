@@ -1,11 +1,15 @@
 package com.example.warehouse.product;
 
+import com.example.warehouse.categoty.CategoryRepository;
+import com.example.warehouse.categoty.entity.Category;
 import com.example.warehouse.common.service.GenericCrudService;
 import com.example.warehouse.product.dto.ProductCreateDto;
 import com.example.warehouse.product.dto.ProductPatchDto;
 import com.example.warehouse.product.dto.ProductResponseDto;
 import com.example.warehouse.product.dto.ProductUpdateDto;
 import com.example.warehouse.product.entity.Product;
+import com.example.warehouse.unit.UnitRepository;
+import com.example.warehouse.unit.entity.Unit;
 import com.example.warehouse.warehouseCost.WarehouseCostRepository;
 import com.example.warehouse.warehouseCost.WarehouseCostService;
 import com.example.warehouse.warehouseCostItem.WarehouseCostItemRepository;
@@ -41,16 +45,33 @@ public class ProductService extends GenericCrudService<Product, Long, ProductCre
     private final WarehouseCostItemService warehouseCostItemService;
     private final WarehouseOutputService outputService;
     private final WarehouseCostService costService;
+    private final UnitRepository unitRepository;
+    private final CategoryRepository categoryRepository;
 
-
-   static List<WarehouseCostItem> warehouseCostItems;
+    static List<WarehouseCostItem> warehouseCostItems;
 
 
     @Override
     protected Product save(ProductCreateDto createDto) {
-        Product product = mapper.toEntity(createDto);
+        Product product = new Product();
+        product.setName(createDto.getName());
+        product.setPicture(createDto.getPicture());
+        product.setProductNumber(createDto.getProductNumber());
+
+        Unit unit = unitRepository.findById(createDto.getUnit_id().getId())
+                .orElseThrow(() -> new RuntimeException("UNIT not found"));
+        product.setUnit(unit);
+
+         Category category = categoryRepository.findById(createDto.getCategory_id().getId())
+                .orElseThrow(() -> new RuntimeException("CATEGORY not found"));
+        product.setCategory(category);
+
         return repository.save(product);
     }
+
+
+
+
 
     @Override
     protected Product updateEntity(ProductUpdateDto updateDto, Product product) {
@@ -59,7 +80,13 @@ public class ProductService extends GenericCrudService<Product, Long, ProductCre
     }
 
 
-     // Yaroqlilik muddati yetib qolgan mahsulotlar soni
+
+
+
+
+
+
+    // Yaroqlilik muddati yetib qolgan mahsulotlar soni
     public int Product_ExpiryDate() {
         int soni = 0;
         LocalDate date = LocalDate.now();
@@ -70,7 +97,6 @@ public class ProductService extends GenericCrudService<Product, Long, ProductCre
         }
         return soni;
     }
-
 
 
     // Kunlik eng ko'p chiqim qilingan mahsulotlar
@@ -99,16 +125,13 @@ public class ProductService extends GenericCrudService<Product, Long, ProductCre
     private List<Product> calculateTopSellingProductsOut(List<WarehouseOutputItem> outputItems) {
         Map<Product, Double> productQuantityMap = outputItems.stream()
                 .collect(Collectors.groupingBy(WarehouseOutputItem::getProduct,
-                        Collectors.summingDouble(WarehouseOutputItem:: getCount)));
+                        Collectors.summingDouble(WarehouseOutputItem::getCount)));
 
         return productQuantityMap.entrySet().stream()
                 .sorted(Map.Entry.<Product, Double>comparingByValue().reversed())
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
     }
-
-
-
 
 
     //Kunlik eng ko’p krim qilingan mahsulotlar
@@ -120,7 +143,7 @@ public class ProductService extends GenericCrudService<Product, Long, ProductCre
     private List<Product> calculateTopSellingProductsCost(List<WarehouseCostItem> costItems) {
         Map<Product, Double> productQuantityMap = costItems.stream()
                 .collect(Collectors.groupingBy(WarehouseCostItem::getProduct_id,
-                        Collectors.summingDouble(WarehouseCostItem:: getCount)));
+                        Collectors.summingDouble(WarehouseCostItem::getCount)));
 
         return productQuantityMap.entrySet().stream()
                 .sorted(Map.Entry.<Product, Double>comparingByValue().reversed())

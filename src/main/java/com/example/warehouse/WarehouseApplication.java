@@ -13,13 +13,7 @@ import java.util.Random;
 @SpringBootApplication
 @EnableJpaRepositories
 public class WarehouseApplication {
-	public static String generateInvoiceNumber() {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("Mdd");
-		String currentDate = dateFormat.format(new Date());
-		int randomPart = new Random().nextInt(900) + 100;
-		String invoiceNumber = currentDate + randomPart;
-		return invoiceNumber;
-	}
+
 
 
 	public static void main(String[] args) {

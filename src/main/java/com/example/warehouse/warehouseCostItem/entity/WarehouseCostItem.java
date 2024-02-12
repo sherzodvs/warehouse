@@ -9,8 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,8 +29,17 @@ public class WarehouseCostItem extends AbsClass {
 
     private LocalDate expiryDate;
 
-    @ManyToMany(mappedBy = "warehouseCostItems")
-    private Set<WarehouseCost> warehouseCosts = new HashSet<>();
+
+
+
+
+    @ManyToOne
+    @JoinColumn(name = "warehouse_cost_id") // Ma'lumotlar bazasidagi qo'shimcha maydon nomi
+    private WarehouseCost warehouseCost;
+
+
+//    @ManyToMany(mappedBy = "warehouseCostItems")
+//    private List<WarehouseCost> warehouseCosts = new ArrayList<>();
 
 
 }

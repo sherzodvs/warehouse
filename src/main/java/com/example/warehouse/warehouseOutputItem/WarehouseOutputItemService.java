@@ -1,6 +1,8 @@
 package com.example.warehouse.warehouseOutputItem;
 
 import com.example.warehouse.common.service.GenericCrudService;
+import com.example.warehouse.product.ProducteRepository;
+import com.example.warehouse.product.entity.Product;
 import com.example.warehouse.warehouseOutput.WarehouseOutputRepository;
 import com.example.warehouse.warehouseOutput.entity.WarehouseOutput;
 import com.example.warehouse.warehouseOutputItem.entity.WarehouseOutputItem;
@@ -22,13 +24,24 @@ public class WarehouseOutputItemService extends GenericCrudService<WarehouseOutp
     private final Class<WarehouseOutputItem> entityClass = WarehouseOutputItem.class;
     private final ModelMapper modelMapper;
     private final WarehouseOutputRepository outRepository;
+    private final ProducteRepository producteRepository;
 
 
 
     @Override
     protected WarehouseOutputItem save(WarehouseOutputItem warehouseOutputItem) {
-        WarehouseOutputItem entity = mapper.toEntity(warehouseOutputItem);
-        return repository.save(entity);    }
+        WarehouseOutputItem warehouseOutputItem1 = new WarehouseOutputItem();
+        warehouseOutputItem1.setCount(warehouseOutputItem.getCount());
+        warehouseOutputItem1.setProduct_price(warehouseOutputItem.getProduct_price());
+        warehouseOutputItem1.setCount(warehouseOutputItem.getCount());
+
+        Product product = producteRepository.findById(warehouseOutputItem.getProduct().getId())
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+        warehouseOutputItem1.setProduct(product);
+        return repository.save(warehouseOutputItem1);
+
+
+    }
 
     @Override
     protected WarehouseOutputItem updateEntity(WarehouseOutputItem warehouseOutputItem, WarehouseOutputItem warehouseOutputItem2) {

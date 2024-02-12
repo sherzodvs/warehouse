@@ -12,9 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
-import java.util.List;
 import java.util.Random;
 
 @Service
@@ -53,9 +51,7 @@ public class WarehouseOutputService {
 
 
 
-    private WarehouseOutputRepository warehouseOutputItemRepository;
 
-    // Other dependencies and methods
 
 
 
@@ -64,7 +60,6 @@ public class WarehouseOutputService {
         SimpleDateFormat dateFormat = new SimpleDateFormat("Mdd");
         String currentDate = dateFormat.format(new Date());
         int randomPart = new Random().nextInt(900) + 100;
-        String invoiceNumber = currentDate + randomPart;
-        return invoiceNumber;
+        return currentDate + randomPart;
     }
 }
