@@ -1,6 +1,7 @@
 package com.example.warehouse.warehouseCost;
 
 import com.example.warehouse.warehouseCost.dto.WarehouseCostResponseDto;
+import com.example.warehouse.warehouseCost.entity.WarehouseCost;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,8 @@ public class WarehouseCostController {
     private WarehouseCostService service;
 
     @PostMapping("/omborgaKirim")
-    public ResponseEntity<WarehouseCostResponseDto> create(@RequestBody @Valid WarehouseCostResponseDto requestDto) {
-        WarehouseCostResponseDto warehouseCostResponseDto = service.create(requestDto);
+    public ResponseEntity<WarehouseCost> create(@RequestBody @Valid WarehouseCostResponseDto requestDto) {
+        WarehouseCost warehouseCostResponseDto = service.save(requestDto);
         return ResponseEntity.ok(warehouseCostResponseDto);
     }
 

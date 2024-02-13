@@ -44,7 +44,8 @@ public class WorkerService extends GenericCrudService<Worker, Long, WorkerCreate
         worker.setWarehouse(warehouse);
 
         return repository.save(worker);
-    }
+
+}
 
 
 
