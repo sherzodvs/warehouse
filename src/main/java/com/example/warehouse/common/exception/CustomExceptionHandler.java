@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
@@ -46,6 +47,14 @@ public class CustomExceptionHandler
             .status( HttpStatus.NOT_FOUND )
             .body( buildErrorResponse( e.getMessage(), HttpStatus.NOT_FOUND ) );
     }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<String> handleValidationException(MethodArgumentNotValidException ex) {
+        String errorMessage = ex.getBindingResult().getFieldError().getDefaultMessage();
+        return ResponseEntity.badRequest().body("Validation error: " + errorMessage);
+    }
+
+
 
     @ExceptionHandler( DataIntegrityViolationException.class )
     // todo We need to handle these exceptions correctly
@@ -173,6 +182,8 @@ public class CustomExceptionHandler
                         .status(HttpStatus.NOT_FOUND)
                         .build());
     }
+
+
     @ExceptionHandler(value = AttachmentNotFound.class)
     public ResponseEntity<CustomErrorResponse> handleSmsAlreadySentException(AttachmentNotFound e) {
         log.error(e.getMessage(), e);

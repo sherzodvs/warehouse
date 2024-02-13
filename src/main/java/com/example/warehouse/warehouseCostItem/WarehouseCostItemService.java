@@ -1,6 +1,7 @@
 package com.example.warehouse.warehouseCostItem;
 
 import com.example.warehouse.categoty.entity.Category;
+import com.example.warehouse.common.exception.CustomException;
 import com.example.warehouse.common.service.GenericCrudService;
 import com.example.warehouse.product.ProducteRepository;
 import com.example.warehouse.product.entity.Product;
@@ -35,6 +36,9 @@ public class WarehouseCostItemService extends GenericCrudService<WarehouseCostIt
     private final WarehouseCostRepository warehouseCostRepository;
 
 
+
+
+
     @Override
     protected WarehouseCostItem save(WarehouseCostItem warehouseCostItem) {
 
@@ -44,12 +48,15 @@ public class WarehouseCostItemService extends GenericCrudService<WarehouseCostIt
         warehouseCostItem1.setExpiryDate(warehouseCostItem.getExpiryDate());
 
         Product product = producteRepository.findById(warehouseCostItem.getProduct_id().getId())
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+                .orElseThrow(() -> new CustomException("Product not found"));
         warehouseCostItem1.setProduct_id(product);
+
         return repository.save(warehouseCostItem1);
 
-
           }
+
+
+
 
     @Override
     protected WarehouseCostItem updateEntity(WarehouseCostItem warehouseCostItem, WarehouseCostItem warehouseCostItem1) {

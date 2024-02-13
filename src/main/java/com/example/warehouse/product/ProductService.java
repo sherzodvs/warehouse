@@ -2,6 +2,7 @@ package com.example.warehouse.product;
 
 import com.example.warehouse.categoty.CategoryRepository;
 import com.example.warehouse.categoty.entity.Category;
+import com.example.warehouse.common.exception.CustomException;
 import com.example.warehouse.common.service.GenericCrudService;
 import com.example.warehouse.product.dto.ProductCreateDto;
 import com.example.warehouse.product.dto.ProductPatchDto;
@@ -59,11 +60,11 @@ public class ProductService extends GenericCrudService<Product, Long, ProductCre
         product.setProductNumber(createDto.getProductNumber());
 
         Unit unit = unitRepository.findById(createDto.getUnit_id().getId())
-                .orElseThrow(() -> new RuntimeException("UNIT not found"));
+                .orElseThrow(() ->new CustomException("UNIT not found"));
         product.setUnit(unit);
 
          Category category = categoryRepository.findById(createDto.getCategory_id().getId())
-                .orElseThrow(() -> new RuntimeException("CATEGORY not found"));
+                .orElseThrow(() -> new CustomException("CATEGORY not found"));
         product.setCategory(category);
 
         return repository.save(product);

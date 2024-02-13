@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class ResponseDto extends AbsClass {
+    private Long id;
     private double count;
 
     private double price;

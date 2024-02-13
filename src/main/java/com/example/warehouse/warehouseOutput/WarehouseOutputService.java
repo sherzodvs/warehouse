@@ -1,5 +1,6 @@
 package com.example.warehouse.warehouseOutput;
 
+import com.example.warehouse.common.exception.CustomException;
 import com.example.warehouse.product.ProducteRepository;
 import com.example.warehouse.product.entity.Product;
 import com.example.warehouse.warehouse.WarehouseRepository;
@@ -31,13 +32,13 @@ public class WarehouseOutputService {
         omborChiqim.setInvoiceNumber("Generated Invoice Number: " + generateInvoiceNumber());
 
         Warehouse warehouse = warehouseRepository.findById(omborChiqimDto.getWarehouse().getId())
-                .orElseThrow(() -> new RuntimeException("warehouse not fount"));
+                .orElseThrow(() -> new CustomException("warehouse not fount"));
         omborChiqim.setWarehouse(warehouse);
 
 
         WarehouseOutputItem chiqimProduct = new WarehouseOutputItem();
         Product product = producteRepository.findById(chiqimProduct.getProduct().getId())
-                .orElseThrow(() -> new RuntimeException("Mahsulot topilmadi"));
+                .orElseThrow(() -> new CustomException("product not found"));
 
         chiqimProduct.setProduct(product);
         chiqimProduct.setProduct_price(chiqimProduct.getProduct_price());
