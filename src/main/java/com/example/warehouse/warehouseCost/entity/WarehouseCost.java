@@ -6,6 +6,7 @@ import com.example.warehouse.taminotchi.entity.Taminotchi;
 import com.example.warehouse.warehouse.entity.Warehouse;
 import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -42,10 +43,11 @@ public class WarehouseCost extends AbsClass {
     @OneToMany(mappedBy = "warehouseCost", cascade = CascadeType.ALL)
     private List<WarehouseCostItem> warehouseCostItemList;
 
+    @NotBlank
     private String costCode;
+
+    @NotBlank
     private String invoiceNumber;
-
-
 
 
 //    @ManyToMany

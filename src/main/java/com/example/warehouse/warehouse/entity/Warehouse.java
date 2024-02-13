@@ -2,6 +2,7 @@ package com.example.warehouse.warehouse.entity;
 
 import com.example.warehouse.common.abstractClass.AbsClass;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "warehouse")
 public class Warehouse extends AbsClass {
 
+    @NotBlank
+    @Column(name ="warehouse_name", unique = true,nullable = false )
     private String name;
     private Boolean status;
 //

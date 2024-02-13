@@ -5,6 +5,7 @@ import com.example.warehouse.currancyType.entity.CurrancyType;
 import com.example.warehouse.warehouse.entity.Warehouse;
 import com.example.warehouse.warehouseOutputItem.entity.WarehouseOutputItem;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -43,8 +44,10 @@ public class WarehouseOutput extends AbsClass {
     private List<WarehouseOutputItem> warehouseOutputItems = new ArrayList<>();
 
 
+    @NotBlank
     private String invoiceNumber;
 
+    @NotBlank
     private String costCode;
 
 
