@@ -1,16 +1,9 @@
 package com.example.warehouse.categoty.entity;
 
 import com.example.warehouse.common.abstractClass.AbsClass;
-import com.example.warehouse.product.entity.Product;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-
-import java.util.List;
+import lombok.*;
 
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
@@ -19,9 +12,10 @@ import java.util.List;
 @Entity
 public class Category extends AbsClass {
 
+   @Column(unique = true,nullable = false)
     private String name;
-    private  Boolean status;
 
+    private Boolean status;
 
 
 }
