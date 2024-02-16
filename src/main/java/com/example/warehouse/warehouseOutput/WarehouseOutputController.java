@@ -23,14 +23,14 @@ public class WarehouseOutputController {
 
     private WarehouseOutputService warehouseOutputService;
 
-    @PostMapping("/create")
-    public ResponseEntity<WarehouseOutput> createWarehouseOutput(@RequestBody WarehouseOutput warehouseOutputDto) {
-        try {
-            WarehouseOutput createdWarehouseOutput = warehouseOutputService.create(warehouseOutputDto);
-            return new ResponseEntity<>(createdWarehouseOutput, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    @PostMapping("/create")
+//    public ResponseEntity<WarehouseOutput> createWarehouseOutput(@RequestBody WarehouseOutput warehouseOutputDto) {
+//        try {
+//            WarehouseOutput createdWarehouseOutput = warehouseOutputService.create(warehouseOutputDto);
+//            return new ResponseEntity<>(createdWarehouseOutput, HttpStatus.CREATED);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 }
 

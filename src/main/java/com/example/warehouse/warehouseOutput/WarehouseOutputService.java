@@ -43,7 +43,7 @@ public class WarehouseOutputService {
         chiqimProduct.setProductId(product);
         chiqimProduct.setProductPrice(chiqimProduct.getProductPrice());
 
-     //   omborChiqim.getWarehouseOutputItems().add(chiqimProduct);
+       // omborChiqim.getWarehouseOutputItems().add(chiqimProduct);
 
         return repository.save(omborChiqim);
     }

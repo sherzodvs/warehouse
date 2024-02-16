@@ -25,9 +25,8 @@ public class Product extends AbsClass {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    private List<String> picture;
+   // private List<String> picture;
 
-    @NotBlank
     private String accountingCode;
 
     @NotBlank

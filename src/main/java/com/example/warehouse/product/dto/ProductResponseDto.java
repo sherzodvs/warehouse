@@ -24,4 +24,5 @@ public class ProductResponseDto {
     @NotBlank
     private String accountingCode;
 
+
 }

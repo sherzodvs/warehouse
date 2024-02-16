@@ -21,7 +21,7 @@ public class WarehouseDtoMapper extends GenericDtoMapper<Warehouse, WarehouseCre
     }
 
     @Override
-    public WarehouseOutputResponseDto toResponseDto(Warehouse warehouse) {
+    public WarehouseResponseDto toResponseDto(Warehouse warehouse) {
         return mapper.map(warehouse, WarehouseResponseDto.class);
     }
 

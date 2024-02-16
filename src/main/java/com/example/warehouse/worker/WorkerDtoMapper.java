@@ -21,7 +21,7 @@ public class WorkerDtoMapper extends GenericDtoMapper<Worker, WorkerCreateDto , 
     }
 
     @Override
-    public WarehouseOutputResponseDto toResponseDto(Worker worker) {
+    public WorkerResponseDto toResponseDto(Worker worker) {
         return mapper.map(worker, WorkerResponseDto.class);
     }
 

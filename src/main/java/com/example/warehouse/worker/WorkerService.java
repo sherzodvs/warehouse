@@ -1,5 +1,6 @@
 package com.example.warehouse.worker;
 
+import com.example.warehouse.common.exception.CustomException;
 import com.example.warehouse.common.service.GenericCrudService;
 import com.example.warehouse.warehouse.WarehouseRepository;
 import com.example.warehouse.warehouse.entity.Warehouse;
@@ -25,7 +26,6 @@ public class WorkerService extends GenericCrudService<Worker, Long, WorkerCreate
     private final WorkerDtoMapper mapper;
     private final Class<Worker> entityClass = Worker.class;
     private final ModelMapper modelMapper;
-
     private final WarehouseRepository warehouseRepository;
 
 
@@ -38,10 +38,10 @@ public class WorkerService extends GenericCrudService<Worker, Long, WorkerCreate
         worker.setPassword(workerDto.getPassword());
         worker.setPhoneNumber(workerDto.getPhoneNumber());
 
-        Warehouse warehouse = warehouseRepository.findById(workerDto.getWarehouse_id())
-                .orElseThrow(() -> new RuntimeException("Warehouse not found"));
+    Warehouse warehouse = warehouseRepository.findById(workerDto.getWarehouse_id())
+            .orElseThrow(() -> new CustomException("Warehouse not found"));
 
-        worker.setWarehouse(warehouse);
+    worker.setWarehouse(warehouse);
 
         return repository.save(worker);
 

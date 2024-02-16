@@ -5,55 +5,53 @@ import com.example.warehouse.common.service.GenericCrudService;
 import com.example.warehouse.product.ProducteRepository;
 import com.example.warehouse.warehouse.WarehouseRepository;
 import com.example.warehouse.warehouse.entity.Warehouse;
-import com.example.warehouse.warehouseCost.dto.WarehouseCostResponseDto;
+import com.example.warehouse.warehouseCost.dto.*;
 import com.example.warehouse.warehouseCost.entity.WarehouseCost;
-import com.example.warehouse.warehouseCostItem.dto.ResponseDto;
+import com.example.warehouse.warehouseCostItem.WarehouseCostItemRepository;
 import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
-
-
 @Service
 @Getter
 @RequiredArgsConstructor
-public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long, WarehouseCostResponseDto, WarehouseCostResponseDto, WarehouseCostResponseDto, WarehouseCostResponseDto> {
+public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long, WarehouseCostCreateDto, WarehouseCostUpdateDto, WarehouseCostPatchDto, WarehouseCostResponseDto> {
 
     private final Class<WarehouseCost> entityClass = WarehouseCost.class;
     private final WarehouseCostDtoMapper mapper;
     private final WarehouseRepository warehouseRepository;
     private final ProducteRepository producteRepository;
     private final WarehouseCostRepository repository;
+    private final WarehouseCostItemRepository warehouseCostItemRepository;
 
 
     @Override
-    protected WarehouseCost save(WarehouseCostResponseDto warehouseCostResponseDto) {
+    protected WarehouseCost save(WarehouseCostCreateDto warehouseCostCreateDto) {
         WarehouseCost warehouseCost = new WarehouseCost();
-        warehouseCost.setDate(warehouseCostResponseDto.getDate());
+        warehouseCost.setDate(warehouseCostCreateDto.getDate());
         warehouseCost.setInvoiceNumber("Generated Invoice Number: " + generateInvoiceNumber());
 
-        Warehouse warehouse = warehouseRepository.findById(warehouseCostResponseDto.getWarehouse().getId())
+        Warehouse warehouse = warehouseRepository.findById(warehouseCostCreateDto.getWarehouseId())
                 .orElseThrow(() -> new CustomException("warehouse not fount"));
         warehouseCost.setWarehouse(warehouse);
 
+//        WarehouseCostItem warehouseCostItem = warehouseCostItemRepository.findById(warehouseCostCreateDto.getWarehouseCostItemId())
+//                .orElseThrow(() -> new CustomException("warehouse not fount"));
+//        warehouseCost.setWarehouse(warehouse);
 
-        WarehouseCostItem warehouseCostItem = new WarehouseCostItem();
-
-        warehouseCostItem.setPrice(warehouseCostItem.getPrice());
-
-       warehouseCost.getWarehouseCostItemList().add(warehouseCostItem);
+       // warehouseCost.getWarehouseCostItemList().add(warehouseCostItem);
 
         return repository.save(warehouseCost);
     }
 
 
     @Override
-    protected WarehouseCost updateEntity(WarehouseCostResponseDto warehouseCostResponseDto, WarehouseCost warehouseCostResponseDto2) {
-        return null;
+    protected WarehouseCost updateEntity(WarehouseCostUpdateDto updateDto, WarehouseCost warehouseCost) {
+        mapper.update(updateDto, warehouseCost);
+        return repository.save(warehouseCost);
     }
 
 

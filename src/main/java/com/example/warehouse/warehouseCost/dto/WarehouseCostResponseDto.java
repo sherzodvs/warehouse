@@ -18,7 +18,7 @@ public class WarehouseCostResponseDto extends AbsClass {
     private LocalDate date;
     private Warehouse warehouse;
     private Taminotchi taminotchi;
-    private List<WarehouseCostItem> warehouseCostItemList;
+   // private List<WarehouseCostItem> warehouseCostItemList;
 
 
 

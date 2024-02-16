@@ -18,9 +18,9 @@ public class ProductUpdateDto {
     private String name;
 
 
-    private Category category_id;
+    private Long category_id;
 
-    private List<String> picture;
+    //private List<String> picture;
 
     @NotBlank
     private String accountingCode;
@@ -28,6 +28,6 @@ public class ProductUpdateDto {
     @NotBlank
     private String productNumber;
 
-    private Unit unit_id;
+    private Long unit_id;
 
 }

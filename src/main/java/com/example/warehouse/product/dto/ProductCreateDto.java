@@ -14,19 +14,20 @@ import java.util.List;
 @Data
 public class ProductCreateDto {
 
-    private Long id;
 
     @NotBlank
     private String name;
 
-    private CategoryResponseDto category_id;
+    private Long category_id;
 
-    private List<String> picture;
+  //  private List<String> picture;
+
+    private String accountingCode;
 
     @NotBlank
     private String productNumber;
 
-    private Unit unit_id;
+    private Long unit_id;
 
 
 }

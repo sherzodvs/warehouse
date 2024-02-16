@@ -55,14 +55,15 @@ public class ProductService extends GenericCrudService<Product, Long, ProductCre
     protected Product save(ProductCreateDto createDto) {
         Product product = new Product();
         product.setName(createDto.getName());
-        product.setPicture(createDto.getPicture());
+       // product.setPicture(createDto.getPicture());
         product.setProductNumber(createDto.getProductNumber());
+        product.setAccountingCode(createDto.getAccountingCode());
 
-        Unit unit = unitRepository.findById(createDto.getUnit_id().getId())
+        Unit unit = unitRepository.findById(createDto.getUnit_id())
                 .orElseThrow(() ->new CustomException("UNIT not found"));
         product.setUnit(unit);
 
-         Category category = categoryRepository.findById(createDto.getCategory_id().getId())
+         Category category = categoryRepository.findById(createDto.getCategory_id())
                 .orElseThrow(() -> new CustomException("CATEGORY not found"));
         product.setCategory(category);
 

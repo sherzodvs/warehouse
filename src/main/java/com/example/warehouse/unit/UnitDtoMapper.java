@@ -21,7 +21,7 @@ public class UnitDtoMapper extends GenericDtoMapper<Unit, UnitCreateDto, UnitUpd
     }
 
     @Override
-    public WarehouseOutputResponseDto toResponseDto(Unit unit) {
+    public UnitResponseDto toResponseDto(Unit unit) {
         return mapper.map(unit, UnitResponseDto.class);
     }
 

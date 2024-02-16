@@ -21,7 +21,7 @@ public class TaminotchiDtoMapper extends GenericDtoMapper<Taminotchi, Taminotchi
     }
 
     @Override
-    public WarehouseOutputResponseDto toResponseDto(Taminotchi taminotchi) {
+    public TaminotchiResponseDto toResponseDto(Taminotchi taminotchi) {
         return mapper.map(taminotchi, TaminotchiResponseDto.class);
     }
 
