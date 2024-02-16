@@ -26,6 +26,6 @@ public class WorkerCreateDto {
 
     @NotBlank
     private String password;
-    private WarehouseResponseDto warehouse_id;
+    private Long warehouse_id;
 
 }

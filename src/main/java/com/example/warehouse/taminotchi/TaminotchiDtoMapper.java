@@ -4,6 +4,7 @@ import com.example.warehouse.taminotchi.dto.TaminotchiCreateDto;
 import com.example.warehouse.taminotchi.dto.TaminotchiResponseDto;
 import com.example.warehouse.taminotchi.dto.TaminotchiUpdateDto;
 import com.example.warehouse.taminotchi.entity.Taminotchi;
+import com.example.warehouse.warehouseOutput.dto.WarehouseOutputResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -20,7 +21,7 @@ public class TaminotchiDtoMapper extends GenericDtoMapper<Taminotchi, Taminotchi
     }
 
     @Override
-    public TaminotchiResponseDto toResponseDto(Taminotchi taminotchi) {
+    public WarehouseOutputResponseDto toResponseDto(Taminotchi taminotchi) {
         return mapper.map(taminotchi, TaminotchiResponseDto.class);
     }
 

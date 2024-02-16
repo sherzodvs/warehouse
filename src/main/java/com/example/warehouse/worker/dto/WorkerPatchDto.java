@@ -1,5 +1,6 @@
 package com.example.warehouse.worker.dto;
 
+import com.example.warehouse.warehouse.dto.WarehouseRequestDto;
 import com.example.warehouse.warehouse.dto.WarehouseResponseDto;
 import com.example.warehouse.warehouse.entity.Warehouse;
 import jakarta.validation.constraints.NotBlank;
@@ -28,5 +29,5 @@ public class WorkerPatchDto {
 
     @NotBlank
     private String password;
-    private WarehouseResponseDto warehouse_id;
+    private WarehouseRequestDto warehouse_id;
 }

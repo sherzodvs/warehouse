@@ -1,33 +1,36 @@
 package com.example.warehouse.warehouseOutput;
 
 import com.example.warehouse.common.service.GenericDtoMapper;
-import com.example.warehouse.warehouseCost.entity.WarehouseCost;
+import com.example.warehouse.warehouseOutput.dto.WarehouseOutputRequestDto;
+import com.example.warehouse.warehouseOutput.dto.WarehouseOutputResponseDto;
 import com.example.warehouse.warehouseOutput.entity.WarehouseOutput;
+import com.example.warehouse.warehouseOutputItem.dto.WarehouseOutputItemRequestDto;
+import com.example.warehouse.warehouseOutputItem.dto.WarehouseOutputItemResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 @Component
 @RequiredArgsConstructor
-public class WarehouseOutputDtoMapper extends GenericDtoMapper<WarehouseOutput, WarehouseOutput,WarehouseOutput,WarehouseOutput> {
+public class WarehouseOutputDtoMapper extends GenericDtoMapper<WarehouseOutput, WarehouseOutputRequestDto,WarehouseOutputRequestDto, WarehouseOutputResponseDto> {
 
     private final ModelMapper mapper;
 
-    @Override
-    public WarehouseOutput toEntity(WarehouseOutput warehouseOutput) {
-        return mapper.map(warehouseOutput, WarehouseOutput.class);    }
 
     @Override
-    public WarehouseOutput toResponseDto(WarehouseOutput warehouseOutput) {
-        return mapper.map(warehouseOutput, WarehouseOutput.class);    }
+    public WarehouseOutput toEntity(WarehouseOutputRequestDto warehouseOutputRequestDto) {
+        return mapper.map(warehouseOutputRequestDto, WarehouseOutput.class);    }
 
     @Override
-    public void update(WarehouseOutput warehouseOutput, WarehouseOutput warehouseOutput2) {
+    public WarehouseOutputResponseDto toResponseDto(WarehouseOutput warehouseOutput) {
+        return mapper.map(warehouseOutput, WarehouseOutputResponseDto.class);    }
+
+    @Override
+    public void update(WarehouseOutputRequestDto warehouseOutput, WarehouseOutput warehouseOutput2) {
         mapper.map(warehouseOutput, warehouseOutput2);
     }
 
     @Override
-    public WarehouseOutput toCreateDto(WarehouseOutput warehouseOutput) {
-        return mapper.map(warehouseOutput, WarehouseOutput.class);    }
+    public WarehouseOutputRequestDto toCreateDto(WarehouseOutput warehouseOutput) {
+        return mapper.map(warehouseOutput, WarehouseOutputRequestDto.class);    }
 }

@@ -4,6 +4,7 @@ import com.example.warehouse.unit.dto.UnitCreateDto;
 import com.example.warehouse.unit.dto.UnitResponseDto;
 import com.example.warehouse.unit.dto.UnitUpdateDto;
 import com.example.warehouse.unit.entity.Unit;
+import com.example.warehouse.warehouseOutput.dto.WarehouseOutputResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -20,7 +21,7 @@ public class UnitDtoMapper extends GenericDtoMapper<Unit, UnitCreateDto, UnitUpd
     }
 
     @Override
-    public UnitResponseDto toResponseDto(Unit unit) {
+    public WarehouseOutputResponseDto toResponseDto(Unit unit) {
         return mapper.map(unit, UnitResponseDto.class);
     }
 

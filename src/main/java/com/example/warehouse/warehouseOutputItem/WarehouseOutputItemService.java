@@ -5,6 +5,8 @@ import com.example.warehouse.product.ProducteRepository;
 import com.example.warehouse.product.entity.Product;
 import com.example.warehouse.warehouseOutput.WarehouseOutputRepository;
 import com.example.warehouse.warehouseOutput.entity.WarehouseOutput;
+import com.example.warehouse.warehouseOutputItem.dto.WarehouseOutputItemRequestDto;
+import com.example.warehouse.warehouseOutputItem.dto.WarehouseOutputItemResponseDto;
 import com.example.warehouse.warehouseOutputItem.entity.WarehouseOutputItem;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +19,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Getter
-public class WarehouseOutputItemService extends GenericCrudService<WarehouseOutputItem,Long,WarehouseOutputItem,WarehouseOutputItem,WarehouseOutputItem,WarehouseOutputItem> {
+public class WarehouseOutputItemService extends GenericCrudService<WarehouseOutputItem,Long,WarehouseOutputItem,WarehouseOutputItem,WarehouseOutputItem, WarehouseOutputItemResponseDto> {
 
     private final WarehouseOutItemRepository repository;
     private final WarehouseOutputItemDtoMapper mapper;
@@ -28,8 +30,24 @@ public class WarehouseOutputItemService extends GenericCrudService<WarehouseOutp
 
 
 
+//    @Override
+//    protected WarehouseOutputItem save(WarehouseOutputItemResponseDto warehouseOutputItem) {
+//        WarehouseOutputItem warehouseOutputItem1 = new WarehouseOutputItem();
+//        warehouseOutputItem1.setCount(warehouseOutputItem.getCount());
+//        warehouseOutputItem1.setProduct_price(warehouseOutputItem.getProductPrice());
+//        warehouseOutputItem1.setCount(warehouseOutputItem.getCount());
+//
+//        Product product = producteRepository.findById(warehouseOutputItem.getProductId())
+//                .orElseThrow(() -> new RuntimeException("Product not found"));
+//        warehouseOutputItem1.setProduct(product);
+//        return repository.save(warehouseOutputItem1);
+//
+//
+//    }
+
     @Override
     protected WarehouseOutputItem save(WarehouseOutputItem warehouseOutputItem) {
+
         WarehouseOutputItem warehouseOutputItem1 = new WarehouseOutputItem();
         warehouseOutputItem1.setCount(warehouseOutputItem.getCount());
         warehouseOutputItem1.setProduct_price(warehouseOutputItem.getProduct_price());
@@ -39,8 +57,6 @@ public class WarehouseOutputItemService extends GenericCrudService<WarehouseOutp
                 .orElseThrow(() -> new RuntimeException("Product not found"));
         warehouseOutputItem1.setProduct(product);
         return repository.save(warehouseOutputItem1);
-
-
     }
 
     @Override

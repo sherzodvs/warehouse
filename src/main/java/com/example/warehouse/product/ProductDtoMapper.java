@@ -1,13 +1,10 @@
 package com.example.warehouse.product;
 import com.example.warehouse.common.service.GenericDtoMapper;
-import com.example.warehouse.currancyType.dto.CurrancyTypeCreateDto;
-import com.example.warehouse.currancyType.dto.CurrancyTypeResponseDto;
-import com.example.warehouse.currancyType.dto.CurrancyTypeUpdateDto;
-import com.example.warehouse.currancyType.entity.CurrancyType;
 import com.example.warehouse.product.dto.ProductCreateDto;
 import com.example.warehouse.product.dto.ProductResponseDto;
 import com.example.warehouse.product.dto.ProductUpdateDto;
 import com.example.warehouse.product.entity.Product;
+import com.example.warehouse.warehouseOutput.dto.WarehouseOutputResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

@@ -1,7 +1,7 @@
 package com.example.warehouse.warehouseOutput.entity;
 
 import com.example.warehouse.common.abstractClass.AbsClass;
-import com.example.warehouse.currancyType.entity.CurrancyType;
+import com.example.warehouse.currancyType.entity.CurrencyType;
 import com.example.warehouse.warehouse.entity.Warehouse;
 import com.example.warehouse.warehouseOutputItem.entity.WarehouseOutputItem;
 import jakarta.persistence.*;
@@ -9,13 +9,10 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,7 +29,7 @@ public class WarehouseOutput extends AbsClass {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "currancyType_id")
-    private CurrancyType currancyType;
+    private CurrencyType currancyType;
 
 
     @ManyToMany

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-public class CurrancyType extends AbsClass {
+public class CurrencyType extends AbsClass {
     @NotBlank
     @Column(unique = true, nullable = false)
     private String name;

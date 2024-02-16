@@ -2,7 +2,7 @@ package com.example.warehouse.warehouseCostItem;
 
 import com.example.warehouse.common.service.GenericDtoMapper;
 import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
-import com.example.warehouse.warehouseOutputItem.entity.WarehouseOutputItem;
+import com.example.warehouse.warehouseOutput.dto.WarehouseOutputResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ public class WarehouseCostItemDtoMapper extends GenericDtoMapper<WarehouseCostIt
     }
 
     @Override
-    public WarehouseCostItem toResponseDto(WarehouseCostItem warehouse) {
+    public WarehouseOutputResponseDto toResponseDto(WarehouseCostItem warehouse) {
         return mapper.map(warehouse, WarehouseCostItem.class);
     }
 

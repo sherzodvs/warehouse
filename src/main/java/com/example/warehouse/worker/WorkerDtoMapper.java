@@ -1,5 +1,6 @@
 package com.example.warehouse.worker;
 import com.example.warehouse.common.service.GenericDtoMapper;
+import com.example.warehouse.warehouseOutput.dto.WarehouseOutputResponseDto;
 import com.example.warehouse.worker.dto.WorkerCreateDto;
 import com.example.warehouse.worker.dto.WorkerResponseDto;
 import com.example.warehouse.worker.dto.WorkerUpdateDto;
@@ -20,7 +21,7 @@ public class WorkerDtoMapper extends GenericDtoMapper<Worker, WorkerCreateDto , 
     }
 
     @Override
-    public WorkerResponseDto toResponseDto(Worker worker) {
+    public WarehouseOutputResponseDto toResponseDto(Worker worker) {
         return mapper.map(worker, WorkerResponseDto.class);
     }
 

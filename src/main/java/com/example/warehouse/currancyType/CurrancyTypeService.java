@@ -5,7 +5,7 @@ import com.example.warehouse.currancyType.dto.CurrancyTypeCreateDto;
 import com.example.warehouse.currancyType.dto.CurrancyTypePatchDto;
 import com.example.warehouse.currancyType.dto.CurrancyTypeResponseDto;
 import com.example.warehouse.currancyType.dto.CurrancyTypeUpdateDto;
-import com.example.warehouse.currancyType.entity.CurrancyType;
+import com.example.warehouse.currancyType.entity.CurrencyType;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -16,22 +16,22 @@ import org.springframework.stereotype.Service;
 @Service
 @Getter
 @RequiredArgsConstructor
-public class CurrancyTypeService extends GenericCrudService<CurrancyType, Long, CurrancyTypeCreateDto, CurrancyTypeUpdateDto, CurrancyTypePatchDto, CurrancyTypeResponseDto> {
+public class CurrancyTypeService extends GenericCrudService<CurrencyType, Long, CurrancyTypeCreateDto, CurrancyTypeUpdateDto, CurrancyTypePatchDto, CurrancyTypeResponseDto> {
 
     private final CurrancyTypeRepository repository;
     private final CurrancyTypeDtoMapper mapper;
-    private final Class<CurrancyType> entityClass = CurrancyType.class;
+    private final Class<CurrencyType> entityClass = CurrencyType.class;
     private final ModelMapper modelMapper;
 
 
     @Override
-    protected CurrancyType save(CurrancyTypeCreateDto createDto) {
-        CurrancyType currancyType = mapper.toEntity(createDto);
+    protected CurrencyType save(CurrancyTypeCreateDto createDto) {
+        CurrencyType currancyType = mapper.toEntity(createDto);
         return repository.save(currancyType);
     }
 
     @Override
-    protected CurrancyType updateEntity(CurrancyTypeUpdateDto updateDto, CurrancyType currancyType) {
+    protected CurrencyType updateEntity(CurrancyTypeUpdateDto updateDto, CurrencyType currancyType) {
         mapper.update(updateDto, currancyType);
         return repository.save(currancyType);
     }
