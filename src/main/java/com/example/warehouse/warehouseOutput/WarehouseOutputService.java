@@ -2,10 +2,9 @@ package com.example.warehouse.warehouseOutput;
 
 import com.example.warehouse.common.exception.CustomException;
 import com.example.warehouse.product.ProducteRepository;
-import com.example.warehouse.product.entity.Product;
 import com.example.warehouse.warehouse.WarehouseRepository;
 import com.example.warehouse.warehouse.entity.Warehouse;
-import com.example.warehouse.warehouseOutput.dto.WarehouseOutputRequestDto;
+import com.example.warehouse.warehouseOutput.dto.WarehouseOutputCreateDto;
 import com.example.warehouse.warehouseOutput.entity.WarehouseOutput;
 import com.example.warehouse.warehouseOutputItem.WarehouseOutItemRepository;
 import com.example.warehouse.warehouseOutputItem.dto.WarehouseOutputItemResponseDto;
@@ -27,7 +26,7 @@ public class WarehouseOutputService {
     private final ProducteRepository producteRepository;
 
 
-    public WarehouseOutput create(WarehouseOutputRequestDto omborChiqimDto) {
+    public WarehouseOutput create(WarehouseOutputCreateDto omborChiqimDto) {
         WarehouseOutput omborChiqim = new WarehouseOutput();
         omborChiqim.setInvoiceNumber("Generated Invoice Number: " + generateInvoiceNumber());
 

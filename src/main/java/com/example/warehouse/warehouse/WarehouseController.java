@@ -27,7 +27,8 @@ public class WarehouseController {
         return ResponseEntity.ok(categoryResponseDto);
     }
     @GetMapping
-    public ResponseEntity<Page<WarehouseResponseDto>> getAll(Pageable pageable, @RequestParam(required = false) String predicate) {
+    public ResponseEntity<Page<WarehouseResponseDto>> getAll(Pageable pageable, @RequestParam(required = false) String predicate)
+    {
         Page<WarehouseResponseDto> all = service.getAll(pageable, predicate);
         return ResponseEntity.ok(all);
     }

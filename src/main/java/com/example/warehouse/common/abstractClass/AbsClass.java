@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 @MappedSuperclass
@@ -16,13 +17,15 @@ public abstract  class AbsClass  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @Column(name = "created_at", nullable = false, updatable = false)
-//    private LocalDateTime createdAt;
-//
-//    @Column(name = "updated_at")
-//    private LocalDateTime updatedAt;
-//
-//
+    @Column(name = "created_at")
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    @CreationTimestamp
+    private LocalDateTime updatedAt;
+
+
 //    @PrePersist
 //    protected void onCreate() {
 //        createdAt = LocalDateTime.now();

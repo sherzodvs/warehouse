@@ -12,6 +12,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -37,7 +38,7 @@ public class WarehouseCost extends AbsClass {
 
 
     @OneToMany(mappedBy = "warehouseCost", cascade = CascadeType.ALL)
-    private List<WarehouseCostItem> warehouseCostItemList;
+    private List<WarehouseCostItem> warehouseCostItemList = new ArrayList<>();
 
     @NotBlank
     private String costCode;

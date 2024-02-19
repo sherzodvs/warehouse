@@ -5,6 +5,7 @@ import com.example.warehouse.warehouse.entity.Warehouse;
 import com.example.warehouse.warehouseCost.WarehouseCostService;
 import com.example.warehouse.warehouseCost.entity.WarehouseCost;
 import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
+import com.example.warehouse.warehouseOutput.dto.WarehouseOutputCreateDto;
 import com.example.warehouse.warehouseOutput.entity.WarehouseOutput;
 import com.example.warehouse.warehouseOutputItem.entity.WarehouseOutputItem;
 import org.springframework.http.HttpStatus;
@@ -23,14 +24,12 @@ public class WarehouseOutputController {
 
     private WarehouseOutputService warehouseOutputService;
 
-//    @PostMapping("/create")
-//    public ResponseEntity<WarehouseOutput> createWarehouseOutput(@RequestBody WarehouseOutput warehouseOutputDto) {
-//        try {
-//            WarehouseOutput createdWarehouseOutput = warehouseOutputService.create(warehouseOutputDto);
-//            return new ResponseEntity<>(createdWarehouseOutput, HttpStatus.CREATED);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
+    @PostMapping("/create")
+    public ResponseEntity<WarehouseOutput> createWarehouseOutput(@RequestBody WarehouseOutputCreateDto warehouseOutputDto) {
+
+            WarehouseOutput createdWarehouseOutput = warehouseOutputService.create(warehouseOutputDto);
+            return new ResponseEntity<>(createdWarehouseOutput, HttpStatus.CREATED);
+
+    }
 }
 

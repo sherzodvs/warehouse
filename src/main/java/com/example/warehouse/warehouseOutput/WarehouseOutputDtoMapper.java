@@ -1,8 +1,10 @@
 package com.example.warehouse.warehouseOutput;
 
 import com.example.warehouse.common.service.GenericDtoMapper;
+import com.example.warehouse.warehouseOutput.dto.WarehouseOutputCreateDto;
 import com.example.warehouse.warehouseOutput.dto.WarehouseOutputRequestDto;
 import com.example.warehouse.warehouseOutput.dto.WarehouseOutputResponseDto;
+import com.example.warehouse.warehouseOutput.dto.WarehouseOutputUpdateDto;
 import com.example.warehouse.warehouseOutput.entity.WarehouseOutput;
 import com.example.warehouse.warehouseOutputItem.dto.WarehouseOutputItemRequestDto;
 import com.example.warehouse.warehouseOutputItem.dto.WarehouseOutputItemResponseDto;
@@ -12,13 +14,18 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class WarehouseOutputDtoMapper extends GenericDtoMapper<WarehouseOutput, WarehouseOutputRequestDto,WarehouseOutputRequestDto, WarehouseOutputResponseDto> {
+public class WarehouseOutputDtoMapper extends GenericDtoMapper<WarehouseOutput, WarehouseOutputCreateDto, WarehouseOutputUpdateDto, WarehouseOutputResponseDto> {
 
     private final ModelMapper mapper;
 
 
+
+
+
+
+
     @Override
-    public WarehouseOutput toEntity(WarehouseOutputRequestDto warehouseOutputRequestDto) {
+    public WarehouseOutput toEntity(WarehouseOutputCreateDto warehouseOutputRequestDto) {
         return mapper.map(warehouseOutputRequestDto, WarehouseOutput.class);    }
 
     @Override
@@ -26,11 +33,11 @@ public class WarehouseOutputDtoMapper extends GenericDtoMapper<WarehouseOutput, 
         return mapper.map(warehouseOutput, WarehouseOutputResponseDto.class);    }
 
     @Override
-    public void update(WarehouseOutputRequestDto warehouseOutput, WarehouseOutput warehouseOutput2) {
-        mapper.map(warehouseOutput, warehouseOutput2);
+    public void update(WarehouseOutputUpdateDto updateDto, WarehouseOutput warehouseOutput2) {
+        mapper.map(updateDto, warehouseOutput2);
     }
 
     @Override
-    public WarehouseOutputRequestDto toCreateDto(WarehouseOutput warehouseOutput) {
-        return mapper.map(warehouseOutput, WarehouseOutputRequestDto.class);    }
+    public WarehouseOutputCreateDto toCreateDto(WarehouseOutput warehouseOutput) {
+        return mapper.map(warehouseOutput, WarehouseOutputCreateDto.class);    }
 }

@@ -34,15 +34,15 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
         warehouseCost.setDate(warehouseCostCreateDto.getDate());
         warehouseCost.setInvoiceNumber("Generated Invoice Number: " + generateInvoiceNumber());
 
-        Warehouse warehouse = warehouseRepository.findById(warehouseCostCreateDto.getWarehouseId())
+        Warehouse warehouse = warehouseRepository.getByIdAndStatusTrue(warehouseCostCreateDto.getWarehouseId())
                 .orElseThrow(() -> new CustomException("warehouse not fount"));
         warehouseCost.setWarehouse(warehouse);
 
-//        WarehouseCostItem warehouseCostItem = warehouseCostItemRepository.findById(warehouseCostCreateDto.getWarehouseCostItemId())
-//                .orElseThrow(() -> new CustomException("warehouse not fount"));
-//        warehouseCost.setWarehouse(warehouse);
+        WarehouseCostItem warehouseCostItem = warehouseCostItemRepository.findById(warehouseCostCreateDto.getWarehouseCostItemId())
+                .orElseThrow(() -> new CustomException("warehouse not fount"));
+        warehouseCost.setWarehouse(warehouse);
 
-       // warehouseCost.getWarehouseCostItemList().add(warehouseCostItem);
+        warehouseCost.getWarehouseCostItemList().add(warehouseCostItem);
 
         return repository.save(warehouseCost);
     }
