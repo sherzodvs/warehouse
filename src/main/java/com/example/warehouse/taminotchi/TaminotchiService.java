@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 @Service
@@ -26,7 +28,9 @@ public class TaminotchiService extends GenericCrudService<Taminotchi, Long, Tami
 
     @Override
     protected Taminotchi save(TaminotchiCreateDto createDto) {
-        Taminotchi taminotchi = mapper.toEntity(createDto);
+        Taminotchi taminotchi = new Taminotchi();
+        taminotchi.setName(createDto.getName());
+        taminotchi.setPhoneNumber((createDto.getPhoneNumber()));
         return repository.save(taminotchi);
     }
 
@@ -35,7 +39,6 @@ public class TaminotchiService extends GenericCrudService<Taminotchi, Long, Tami
         mapper.update(updateDto, taminotchi);
         return repository.save(taminotchi);
     }
-
 
 
 

@@ -18,7 +18,7 @@ import java.util.List;
 public class Product extends AbsClass {
 
     @NotBlank
-    @Column(name = "product_name",unique = true,nullable = false)
+    @Column(name = "name",unique = true,nullable = false)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)

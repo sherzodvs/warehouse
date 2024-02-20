@@ -40,10 +40,9 @@ public class WarehouseCost extends AbsClass {
     @OneToMany(mappedBy = "warehouseCost", cascade = CascadeType.ALL)
     private List<WarehouseCostItem> warehouseCostItemList = new ArrayList<>();
 
-    @NotBlank
     private String costCode;
 
-    @NotBlank
+
     private String invoiceNumber;
 
 
