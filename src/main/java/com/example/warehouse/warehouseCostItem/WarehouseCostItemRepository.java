@@ -26,17 +26,17 @@ public interface WarehouseCostItemRepository extends GenericSpecificationReposit
 
 
 
-    EntityManager entityManager = null;
+//    EntityManager entityManager = null;
 
 
-    @Transactional
-    public default WarehouseCostItem save(WarehouseCostItem warehouseCostItem) {
-        if (warehouseCostItem.getId() == null) {
-            entityManager.persist(warehouseCostItem);
-        } else {
-            warehouseCostItem = entityManager.merge(warehouseCostItem);
-        }
-        return warehouseCostItem;
-    }
+//    @Transactional
+//    public default WarehouseCostItem save(WarehouseCostItem warehouseCostItem) {
+//        if (warehouseCostItem.getId() == null) {
+//            entityManager.persist(warehouseCostItem);
+//        } else {
+//            warehouseCostItem = entityManager.merge(warehouseCostItem);
+//        }
+//        return warehouseCostItem;
+//    }
 
 }

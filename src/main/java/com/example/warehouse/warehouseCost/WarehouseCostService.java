@@ -43,24 +43,24 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
 
     public WarehouseCost saveCostWithItems(WarehouseCostCreateDto cost) {
 
-        WarehouseCostItem warehouseCostItem = new WarehouseCostItem();
 
         WarehouseCost savedCost = save(cost);
 
 
-        for (WarehouseCostItem costItem : savedCost.getWarehouseCostItemList()) {
+        for (WarehouseCostItemCreateDto costItem : cost.getWarehouseCostItems()) {
+            WarehouseCostItem warehouseCostItem = new WarehouseCostItem();
 
-            costItem.setWarehouseCost(savedCost);
+          //  costItem.setWarehouseCost(savedCost);
             warehouseCostItem.setCount(costItem.getCount());
             warehouseCostItem.setPrice(costItem.getPrice());
-            Product product = producteRepository.findById(costItem.getProduct_id().getId())
+            Product product = producteRepository.findById(costItem.getProductId())
                     .orElseThrow(() -> new CustomException("product not fount"));
 
             warehouseCostItem.setProduct_id(product);
 
 
 
-            warehouseCostItemRepository.save(costItem);
+            warehouseCostItemRepository.save(warehouseCostItem);
 
         }
 

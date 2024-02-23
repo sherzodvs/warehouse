@@ -5,6 +5,8 @@ import com.example.warehouse.common.service.GenericCrudService;
 import com.example.warehouse.product.ProducteRepository;
 import com.example.warehouse.product.entity.Product;
 import com.example.warehouse.warehouseCost.WarehouseCostRepository;
+import com.example.warehouse.warehouseCost.dto.WarehouseCostCreateDto;
+import com.example.warehouse.warehouseCost.entity.WarehouseCost;
 import com.example.warehouse.warehouseCostItem.dto.WarehouseCostItemCreateDto;
 import com.example.warehouse.warehouseCostItem.dto.WarehouseCostItemResponseDto;
 import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
@@ -44,6 +46,8 @@ public class WarehouseCostItemService extends GenericCrudService<WarehouseCostIt
         return repository.save(warehouseCostItem1);
 
     }
+
+
 
 
     @Override
