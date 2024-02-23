@@ -26,6 +26,7 @@ public abstract  class AbsClass  {
     private LocalDateTime updatedAt;
 
 
+
 //    @PrePersist
 //    protected void onCreate() {
 //        createdAt = LocalDateTime.now();

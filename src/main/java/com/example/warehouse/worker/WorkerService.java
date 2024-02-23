@@ -38,7 +38,7 @@ public class WorkerService extends GenericCrudService<Worker, Long, WorkerCreate
         worker.setPassword(workerDto.getPassword());
         worker.setPhoneNumber(workerDto.getPhoneNumber());
 
-    Warehouse warehouse = warehouseRepository.findById(workerDto.getWarehouse_id())
+    Warehouse warehouse = warehouseRepository.getByIdAndStatusTrue(workerDto.getWarehouse_id())
             .orElseThrow(() -> new CustomException("Warehouse not found"));
 
     worker.setWarehouse(warehouse);

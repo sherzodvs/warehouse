@@ -30,7 +30,8 @@ public class WarehouseOutputItem extends AbsClass {
     private double product_price;
 
 
-    @ManyToMany(mappedBy = "warehouseOutputItems")
-    private List<WarehouseOutput> warehouseOutputs = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "warehouse_output_id") // Ma'lumotlar bazasidagi qo'shimcha maydon nomi
+    private WarehouseOutput warehouseOutput;
 
 }

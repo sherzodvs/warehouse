@@ -1,10 +1,13 @@
 package com.example.warehouse.warehouseOutput.dto;
 
+import com.example.warehouse.warehouseOutputItem.dto.WarehouseOutputItemCreateDto;
+import com.example.warehouse.warehouseOutputItem.entity.WarehouseOutputItem;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,7 +16,7 @@ public class WarehouseOutputCreateDto {
     private LocalDate date;
     private Long warehouseId;
 
-   // private Long warehouseCostItemId;
+    private List<WarehouseOutputItemCreateDto> warehouseOutputItemList;
     private Long currencyTypeId;
     private String costCode;
 

@@ -46,12 +46,4 @@ public class WarehouseCost extends AbsClass {
     private String invoiceNumber;
 
 
-//    @ManyToMany
-//    @JoinTable(
-//            name = "warehouseCosts_warehouseCostItems",
-//            joinColumns = @JoinColumn(name = "warehouseCosts_id"),
-//            inverseJoinColumns = @JoinColumn(name = "warehouseCostItems_id")
-//    )
-//    private LinkStyle<WarehouseCostItem> warehouseCostItems = new ArrayList<>();
-
 }

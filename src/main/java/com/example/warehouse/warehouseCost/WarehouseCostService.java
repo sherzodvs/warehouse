@@ -2,19 +2,29 @@ package com.example.warehouse.warehouseCost;
 
 import com.example.warehouse.common.exception.CustomException;
 import com.example.warehouse.common.service.GenericCrudService;
+import com.example.warehouse.currancyType.CurrancyTypeRepository;
+import com.example.warehouse.currancyType.entity.CurrencyType;
 import com.example.warehouse.product.ProducteRepository;
+import com.example.warehouse.product.entity.Product;
+import com.example.warehouse.taminotchi.TaminotchiRepository;
+import com.example.warehouse.taminotchi.entity.Taminotchi;
 import com.example.warehouse.warehouse.WarehouseRepository;
 import com.example.warehouse.warehouse.entity.Warehouse;
 import com.example.warehouse.warehouseCost.dto.*;
 import com.example.warehouse.warehouseCost.entity.WarehouseCost;
 import com.example.warehouse.warehouseCostItem.WarehouseCostItemRepository;
+import com.example.warehouse.warehouseCostItem.WarehouseCostItemService;
+import com.example.warehouse.warehouseCostItem.dto.WarehouseCostItemCreateDto;
 import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Random;
+
 @Service
 @Getter
 @RequiredArgsConstructor
@@ -26,23 +36,58 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
     private final ProducteRepository producteRepository;
     private final WarehouseCostRepository repository;
     private final WarehouseCostItemRepository warehouseCostItemRepository;
+    private final TaminotchiRepository taminotchiRepository;
+    private final CurrancyTypeRepository currancyTypeRepository;
+    private final WarehouseCostItemService costItemService;
+
+
+    public WarehouseCost saveCostWithItems(WarehouseCostCreateDto cost) {
+
+        WarehouseCostItem warehouseCostItem = new WarehouseCostItem();
+
+        WarehouseCost savedCost = save(cost);
+
+
+        for (WarehouseCostItem costItem : savedCost.getWarehouseCostItemList()) {
+
+            costItem.setWarehouseCost(savedCost);
+            warehouseCostItem.setCount(costItem.getCount());
+            warehouseCostItem.setPrice(costItem.getPrice());
+            Product product = producteRepository.findById(costItem.getProduct_id().getId())
+                    .orElseThrow(() -> new CustomException("product not fount"));
+
+            warehouseCostItem.setProduct_id(product);
+
+
+
+            warehouseCostItemRepository.save(costItem);
+
+        }
+
+        return savedCost;
+    }
 
 
     @Override
     protected WarehouseCost save(WarehouseCostCreateDto warehouseCostCreateDto) {
         WarehouseCost warehouseCost = new WarehouseCost();
         warehouseCost.setDate(warehouseCostCreateDto.getDate());
-        warehouseCost.setInvoiceNumber("Generated Invoice Number: " + generateInvoiceNumber());
 
         Warehouse warehouse = warehouseRepository.getByIdAndStatusTrue(warehouseCostCreateDto.getWarehouseId())
                 .orElseThrow(() -> new CustomException("warehouse not fount"));
         warehouseCost.setWarehouse(warehouse);
 
-        WarehouseCostItem warehouseCostItem = warehouseCostItemRepository.findById(warehouseCostCreateDto.getWarehouseCostItemId())
-                .orElseThrow(() -> new CustomException("warehouse not fount"));
-        warehouseCost.setWarehouse(warehouse);
+        Taminotchi taminotchi = taminotchiRepository.findById(warehouseCostCreateDto.getTaminotchiId())
+                .orElseThrow(() -> new CustomException("taminotchi not fount"));
+        warehouseCost.setTaminotchi(taminotchi);
 
-        warehouseCost.getWarehouseCostItemList().add(warehouseCostItem);
+        CurrencyType currencyType = currancyTypeRepository.findById(warehouseCostCreateDto.getCurrencyTypeId())
+                .orElseThrow(() -> new CustomException("currency Type not fount"));
+        warehouseCost.setCurrancyType(currencyType);
+
+        warehouseCost.setInvoiceNumber("Generated Invoice Number: " + generateInvoiceNumber());
+        warehouseCost.setCostCode(warehouseCostCreateDto.getCostCode());
+      //  warehouseCost.getWarehouseCostItemList().add()
 
         return repository.save(warehouseCost);
     }

@@ -23,7 +23,7 @@ public class WarehouseCostController {
     @PostMapping("/omborgaKirim")
     public ResponseEntity<WarehouseCost> create(@RequestBody @Valid WarehouseCostCreateDto createDto) {
       //  if (service != null) {
-            WarehouseCost warehouseCostResponseDto = service.save(createDto);
+            WarehouseCost warehouseCostResponseDto = service.saveCostWithItems(createDto);
             return ResponseEntity.ok(warehouseCostResponseDto);
 //        } else
 //            return null;
