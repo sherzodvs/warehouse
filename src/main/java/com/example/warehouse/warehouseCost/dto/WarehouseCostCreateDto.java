@@ -1,5 +1,6 @@
 package com.example.warehouse.warehouseCost.dto;
 
+import com.example.warehouse.currancyType.entity.CurrencyType;
 import com.example.warehouse.warehouseCostItem.dto.WarehouseCostItemCreateDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,6 +15,7 @@ public class WarehouseCostCreateDto {
     private LocalDate date;
     private Long warehouseId;
     private Long taminotchiId;
+    private Long  currencyType;
     private List<WarehouseCostItemCreateDto> warehouseCostItems;
     private Long currencyTypeId;
     private String costCode;

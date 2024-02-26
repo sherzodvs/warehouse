@@ -8,7 +8,5 @@ import java.time.LocalDate;
 
 @Repository
 public interface WarehouseCostItemRepository extends GenericSpecificationRepository<WarehouseCostItem, Long> {
-    long countByExpiryDateBefore(LocalDate expiryDate);
-
 
 }

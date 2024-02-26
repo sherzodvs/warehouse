@@ -118,10 +118,10 @@ public class ProductService extends GenericCrudService<Product, Long, ProductCre
 
 
     //Kunlik eng ko’p chiqim qilingan mahsulotlar
-    public List<Product> getTopSellingProductsForDayOut(LocalDate date) {
-        List<WarehouseOutputItem> outputItemsForDay = warehouseOutputItemService.getWarehouseOutputItemsForDay(date);
-        return calculateTopSellingProductsOut(outputItemsForDay);
-    }
+//    public List<Product> getTopSellingProductsForDayOut(LocalDate date) {
+//        List<WarehouseOutputItem> outputItemsForDay = warehouseOutputItemService.getWarehouseOutputItemsForDay(date);
+//        return calculateTopSellingProductsOut(outputItemsForDay);
+//    }
 
     private List<Product> calculateTopSellingProductsOut(List<WarehouseOutputItem> outputItems) {
         Map<Product, Double> productQuantityMap = outputItems.stream()

@@ -21,16 +21,16 @@ public class WarehouseOutput extends AbsClass {
 
     private LocalDate date;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "warehouse_id")
     private Warehouse warehouse;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "currancyType_id")
     private CurrencyType currancyType;
 
-    @OneToMany(mappedBy = "warehouseOutput", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "warehouseOutput", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<WarehouseOutputItem> warehouseOutputItemList= new ArrayList<>();
 
     @NotBlank

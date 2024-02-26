@@ -13,12 +13,13 @@ import com.example.warehouse.warehouseCost.dto.*;
 import com.example.warehouse.warehouseCost.entity.WarehouseCost;
 import com.example.warehouse.warehouseCostItem.WarehouseCostItemRepository;
 import com.example.warehouse.warehouseCostItem.WarehouseCostItemService;
+import com.example.warehouse.warehouseCostItem.dto.WarehouseCostItemCreateDto;
+import jakarta.transaction.Transactional;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Random;
+import java.util.*;
 
 @Service
 @Getter
@@ -35,10 +36,10 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
     private final CurrancyTypeRepository currancyTypeRepository;
     private final WarehouseCostItemService costItemService;
 
-
+@Transactional
     public WarehouseCost saveCostWithItems(WarehouseCostCreateDto cost) {
         WarehouseCost savedCost = save(cost);
-        costItemService.save(cost);
+        costItemService.saveWarehouseCostItems(cost,savedCost);
         return savedCost;
     }
 
@@ -63,8 +64,19 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
         warehouseCost.setInvoiceNumber("Generated Invoice Number: " + generateInvoiceNumber());
         warehouseCost.setCostCode(warehouseCostCreateDto.getCostCode());
 
+
         return repository.save(warehouseCost);
     }
+
+
+
+
+    public WarehouseCost getByCostCode(String costCode) {
+        return repository.findByCostCode(costCode);
+
+    }
+
+
 
 
     @Override
@@ -72,6 +84,9 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
         mapper.update(updateDto, warehouseCost);
         return repository.save(warehouseCost);
     }
+
+
+
 
 
     public static String generateInvoiceNumber() {

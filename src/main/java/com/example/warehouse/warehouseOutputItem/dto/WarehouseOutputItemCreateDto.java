@@ -1,8 +1,12 @@
 package com.example.warehouse.warehouseOutputItem.dto;
 
+import com.example.warehouse.warehouseOutput.dto.WarehouseOutputCreateDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,4 +18,6 @@ public class WarehouseOutputItemCreateDto {
     private double count;
 
     private double product_price;
+    private List<WarehouseOutputCreateDto> warehouseOutputCreateDtoList =new ArrayList<>();
+
 }

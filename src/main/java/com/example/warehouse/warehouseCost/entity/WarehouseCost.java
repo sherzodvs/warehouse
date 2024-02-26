@@ -10,7 +10,6 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,19 +22,19 @@ public class WarehouseCost extends AbsClass {
 
     private LocalDate date;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "warehouse_id")
     private Warehouse warehouse;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "taminotchi_id")
     private Taminotchi taminotchi;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "currancyType_id")
     private CurrencyType currancyType;
 
-    @OneToMany(mappedBy = "warehouseCost", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "warehouseCost", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<WarehouseCostItem> warehouseCostItemList = new ArrayList<>();
 
     @NotBlank

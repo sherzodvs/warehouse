@@ -2,6 +2,7 @@ package com.example.warehouse.warehouseOutputItem;
 
 import com.example.warehouse.common.service.GenericDtoMapper;
 import com.example.warehouse.warehouseOutput.dto.WarehouseOutputResponseDto;
+import com.example.warehouse.warehouseOutputItem.dto.WarehouseOutputItemCreateDto;
 import com.example.warehouse.warehouseOutputItem.dto.WarehouseOutputItemResponseDto;
 import com.example.warehouse.warehouseOutputItem.entity.WarehouseOutputItem;
 import lombok.RequiredArgsConstructor;
@@ -10,11 +11,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class WarehouseOutputItemDtoMapper extends GenericDtoMapper<WarehouseOutputItem,WarehouseOutputItem,WarehouseOutputItem, WarehouseOutputItemResponseDto> {
+public class WarehouseOutputItemDtoMapper extends GenericDtoMapper<WarehouseOutputItem, WarehouseOutputItemCreateDto,WarehouseOutputItem, WarehouseOutputItemResponseDto> {
    private final ModelMapper mapper;
 
     @Override
-    public WarehouseOutputItem toEntity(WarehouseOutputItem warehouseOutputItem) {
+    public WarehouseOutputItem toEntity(WarehouseOutputItemCreateDto warehouseOutputItem) {
         return mapper.map(warehouseOutputItem, WarehouseOutputItem.class);
     }
 
@@ -30,7 +31,7 @@ public class WarehouseOutputItemDtoMapper extends GenericDtoMapper<WarehouseOutp
     }
 
     @Override
-    public WarehouseOutputItem toCreateDto(WarehouseOutputItem warehouse) {
-        return mapper.map(warehouse, WarehouseOutputItem.class);
+    public WarehouseOutputItemCreateDto toCreateDto(WarehouseOutputItem warehouse) {
+        return mapper.map(warehouse, WarehouseOutputItemCreateDto.class);
     }
 }
