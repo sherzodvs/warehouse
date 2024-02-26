@@ -17,13 +17,6 @@ import org.springframework.stereotype.Component;
 public class WarehouseOutputDtoMapper extends GenericDtoMapper<WarehouseOutput, WarehouseOutputCreateDto, WarehouseOutputUpdateDto, WarehouseOutputResponseDto> {
 
     private final ModelMapper mapper;
-
-
-
-
-
-
-
     @Override
     public WarehouseOutput toEntity(WarehouseOutputCreateDto warehouseOutputRequestDto) {
         return mapper.map(warehouseOutputRequestDto, WarehouseOutput.class);    }
