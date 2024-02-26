@@ -1,11 +1,12 @@
 package com.example.warehouse.warehouseOutputItem;
 
+import com.example.warehouse.common.exception.CustomException;
 import com.example.warehouse.common.service.GenericCrudService;
 import com.example.warehouse.product.ProducteRepository;
 import com.example.warehouse.product.entity.Product;
 import com.example.warehouse.warehouseOutput.WarehouseOutputRepository;
-import com.example.warehouse.warehouseOutput.entity.WarehouseOutput;
-import com.example.warehouse.warehouseOutputItem.dto.WarehouseOutputItemRequestDto;
+import com.example.warehouse.warehouseOutput.dto.WarehouseOutputCreateDto;
+import com.example.warehouse.warehouseOutputItem.dto.WarehouseOutputItemCreateDto;
 import com.example.warehouse.warehouseOutputItem.dto.WarehouseOutputItemResponseDto;
 import com.example.warehouse.warehouseOutputItem.entity.WarehouseOutputItem;
 import lombok.Getter;
@@ -30,20 +31,26 @@ public class WarehouseOutputItemService extends GenericCrudService<WarehouseOutp
 
 
 
-//    @Override
-//    protected WarehouseOutputItem save(WarehouseOutputItemResponseDto warehouseOutputItem) {
-//        WarehouseOutputItem warehouseOutputItem1 = new WarehouseOutputItem();
-//        warehouseOutputItem1.setCount(warehouseOutputItem.getCount());
-//        warehouseOutputItem1.setProduct_price(warehouseOutputItem.getProductPrice());
-//        warehouseOutputItem1.setCount(warehouseOutputItem.getCount());
-//
-//        Product product = producteRepository.findById(warehouseOutputItem.getProductId())
-//                .orElseThrow(() -> new RuntimeException("Product not found"));
-//        warehouseOutputItem1.setProduct(product);
-//        return repository.save(warehouseOutputItem1);
-//
-//
-//    }
+
+
+    public WarehouseOutputItem save(WarehouseOutputCreateDto createDto) {
+
+        WarehouseOutputItem warehouseOutputItem = new WarehouseOutputItem();
+
+        for (WarehouseOutputItemCreateDto costItem : createDto.getWarehouseOutputItemList()) {
+
+            warehouseOutputItem.setCount(costItem.getCount());
+            warehouseOutputItem.setProduct_price(costItem.getProduct_price());
+            Product product = producteRepository.findById(costItem.getProduct())
+                    .orElseThrow(() -> new CustomException("product not fount"));
+
+            warehouseOutputItem.setProduct(product);
+
+             return repository.save(warehouseOutputItem);
+        }
+        return  repository.save(warehouseOutputItem);
+    }
+
 
     @Override
     protected WarehouseOutputItem save(WarehouseOutputItem warehouseOutputItem) {

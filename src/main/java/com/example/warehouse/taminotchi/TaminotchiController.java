@@ -1,7 +1,5 @@
 package com.example.warehouse.taminotchi;
 
-import com.example.warehouse.product.dto.ProductCreateDto;
-import com.example.warehouse.product.dto.ProductResponseDto;
 import com.example.warehouse.taminotchi.dto.TaminotchiCreateDto;
 import com.example.warehouse.taminotchi.dto.TaminotchiPatchDto;
 import com.example.warehouse.taminotchi.dto.TaminotchiResponseDto;

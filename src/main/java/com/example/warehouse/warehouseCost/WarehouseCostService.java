@@ -5,7 +5,6 @@ import com.example.warehouse.common.service.GenericCrudService;
 import com.example.warehouse.currancyType.CurrancyTypeRepository;
 import com.example.warehouse.currancyType.entity.CurrencyType;
 import com.example.warehouse.product.ProducteRepository;
-import com.example.warehouse.product.entity.Product;
 import com.example.warehouse.taminotchi.TaminotchiRepository;
 import com.example.warehouse.taminotchi.entity.Taminotchi;
 import com.example.warehouse.warehouse.WarehouseRepository;
@@ -14,14 +13,10 @@ import com.example.warehouse.warehouseCost.dto.*;
 import com.example.warehouse.warehouseCost.entity.WarehouseCost;
 import com.example.warehouse.warehouseCostItem.WarehouseCostItemRepository;
 import com.example.warehouse.warehouseCostItem.WarehouseCostItemService;
-import com.example.warehouse.warehouseCostItem.dto.WarehouseCostItemCreateDto;
-import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Random;
 
@@ -42,28 +37,8 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
 
 
     public WarehouseCost saveCostWithItems(WarehouseCostCreateDto cost) {
-
-
         WarehouseCost savedCost = save(cost);
-
-
-        for (WarehouseCostItemCreateDto costItem : cost.getWarehouseCostItems()) {
-            WarehouseCostItem warehouseCostItem = new WarehouseCostItem();
-
-          //  costItem.setWarehouseCost(savedCost);
-            warehouseCostItem.setCount(costItem.getCount());
-            warehouseCostItem.setPrice(costItem.getPrice());
-            Product product = producteRepository.findById(costItem.getProductId())
-                    .orElseThrow(() -> new CustomException("product not fount"));
-
-            warehouseCostItem.setProduct_id(product);
-
-
-
-            warehouseCostItemRepository.save(warehouseCostItem);
-
-        }
-
+        costItemService.save(cost);
         return savedCost;
     }
 
@@ -87,7 +62,6 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
 
         warehouseCost.setInvoiceNumber("Generated Invoice Number: " + generateInvoiceNumber());
         warehouseCost.setCostCode(warehouseCostCreateDto.getCostCode());
-      //  warehouseCost.getWarehouseCostItemList().add()
 
         return repository.save(warehouseCost);
     }

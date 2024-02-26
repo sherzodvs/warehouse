@@ -4,7 +4,6 @@ import com.example.warehouse.taminotchi.dto.TaminotchiCreateDto;
 import com.example.warehouse.taminotchi.dto.TaminotchiResponseDto;
 import com.example.warehouse.taminotchi.dto.TaminotchiUpdateDto;
 import com.example.warehouse.taminotchi.entity.Taminotchi;
-import com.example.warehouse.warehouseOutput.dto.WarehouseOutputResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

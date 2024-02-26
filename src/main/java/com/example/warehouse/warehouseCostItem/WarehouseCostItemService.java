@@ -6,7 +6,6 @@ import com.example.warehouse.product.ProducteRepository;
 import com.example.warehouse.product.entity.Product;
 import com.example.warehouse.warehouseCost.WarehouseCostRepository;
 import com.example.warehouse.warehouseCost.dto.WarehouseCostCreateDto;
-import com.example.warehouse.warehouseCost.entity.WarehouseCost;
 import com.example.warehouse.warehouseCostItem.dto.WarehouseCostItemCreateDto;
 import com.example.warehouse.warehouseCostItem.dto.WarehouseCostItemResponseDto;
 import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
@@ -16,6 +15,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Getter
@@ -30,25 +30,30 @@ public class WarehouseCostItemService extends GenericCrudService<WarehouseCostIt
     private final WarehouseCostRepository warehouseCostRepository;
 
 
-    @Override
-    protected WarehouseCostItem save(WarehouseCostItemCreateDto warehouseCostItem) {
+    public WarehouseCostItem save(WarehouseCostCreateDto createDto)
+    {
+        WarehouseCostItem warehouseCostItem = new WarehouseCostItem();
 
-        WarehouseCostItem warehouseCostItem1 = new WarehouseCostItem();
-        warehouseCostItem1.setCount(warehouseCostItem.getCount());
-        warehouseCostItem1.setPrice(warehouseCostItem.getPrice());
-        warehouseCostItem1.setExpiryDate(warehouseCostItem.getExpiryDate());
+        for (WarehouseCostItemCreateDto costItem : createDto.getWarehouseCostItems()) {
 
-        Product product = producteRepository.findById(warehouseCostItem.getProductId())
-                .orElseThrow(() -> new CustomException("Product not found"));
-        warehouseCostItem1.setProduct_id(product);
+            warehouseCostItem.setCount(costItem.getCount());
+            warehouseCostItem.setPrice(costItem.getPrice());
+            Product product = producteRepository.findById(costItem.getProductId())
+                    .orElseThrow(() -> new CustomException("product not fount"));
 
+            warehouseCostItem.setProduct_id(product);
 
-        return repository.save(warehouseCostItem1);
+            return repository.save(warehouseCostItem);
+        }
+        return repository.save(warehouseCostItem);
 
     }
 
 
-
+    @Override
+    protected WarehouseCostItem save(WarehouseCostItemCreateDto warehouseCostItemCreateDto) {
+        return null;
+    }
 
     @Override
     protected WarehouseCostItem updateEntity(WarehouseCostItem warehouseCostItem, WarehouseCostItem warehouseCostItem1) {
@@ -59,9 +64,6 @@ public class WarehouseCostItemService extends GenericCrudService<WarehouseCostIt
     public List<WarehouseCostItem> getWarehouseCostItemsForDay(LocalDate date) {
         return costRepository.findByDate(date);
     }
-
-
-
 
 
 }

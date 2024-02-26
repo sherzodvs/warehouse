@@ -14,6 +14,7 @@ import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
 import com.example.warehouse.warehouseOutput.dto.WarehouseOutputCreateDto;
 import com.example.warehouse.warehouseOutput.entity.WarehouseOutput;
 import com.example.warehouse.warehouseOutputItem.WarehouseOutItemRepository;
+import com.example.warehouse.warehouseOutputItem.WarehouseOutputItemService;
 import com.example.warehouse.warehouseOutputItem.dto.WarehouseOutputItemResponseDto;
 import com.example.warehouse.warehouseOutputItem.entity.WarehouseOutputItem;
 import lombok.Getter;
@@ -37,44 +38,14 @@ public class WarehouseOutputService {
     private final ProducteRepository producteRepository;
     private final WarehouseOutItemRepository warehouseOutItemRepository;
     private final CurrancyTypeRepository currancyTypeRepository;
+    private final WarehouseOutputItemService warehouseOutputItemService;
 
 
-
-
-
-
-
-
-
-
-    public WarehouseOutput saveCostWithItems(WarehouseOutputCreateDto createDto) {
-
-        WarehouseOutputItem warehouseOutputItem = new WarehouseOutputItem();
-
-        WarehouseOutput saved = save(createDto);
-
-
-        for (WarehouseOutputItem costItem : saved.getWarehouseOutputItemList()) {
-
-            costItem.setWarehouseOutput(saved);
-            warehouseOutputItem.setCount(costItem.getCount());
-            warehouseOutputItem.setProduct_price(costItem.getProduct_price());
-            Product product = producteRepository.findById(costItem.getProduct().getId())
-                    .orElseThrow(() -> new CustomException("product not fount"));
-
-            warehouseOutputItem.setProduct(product);
-
-
-
-            warehouseOutItemRepository.save(costItem);
-
-        }
-
+    public WarehouseOutput saveCostWithItems(WarehouseOutputCreateDto output) {
+        WarehouseOutput saved = save(output);
+        warehouseOutputItemService.save(output);
         return saved;
     }
-
-
-
 
 
     protected WarehouseOutput save(WarehouseOutputCreateDto omborChiqimDto) {

@@ -1,6 +1,5 @@
 package com.example.warehouse.warehouseCostItem;
 
-import com.example.warehouse.taminotchi.dto.TaminotchiResponseDto;
 import com.example.warehouse.warehouseCostItem.dto.WarehouseCostItemResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +27,4 @@ public class WarehouseCostItemController {
     }
 
 
-
-
-//    @GetMapping
-//    public ResponseEntity<Page<WarehouseCostItemResponseDto>> getAll(Pageable pageable, @RequestParam(required = false) String predicate) {
-//        Page<WarehouseCostItemResponseDto> all = warehouseOutputItemService.getAll(pageable, predicate);
-//        return ResponseEntity.ok(all);
-//    }
 }
