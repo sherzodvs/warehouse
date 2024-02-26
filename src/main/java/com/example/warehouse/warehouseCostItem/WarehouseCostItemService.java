@@ -30,14 +30,28 @@ public class WarehouseCostItemService extends GenericCrudService<WarehouseCostIt
     private final WarehouseCostRepository warehouseCostRepository;
 
 
-    public WarehouseCostItem save(WarehouseCostCreateDto createDto)
-    {
+    public WarehouseCostItem save(WarehouseCostCreateDto createDto) {
         WarehouseCostItem warehouseCostItem = new WarehouseCostItem();
 
         for (WarehouseCostItemCreateDto costItem : createDto.getWarehouseCostItems()) {
+            if (costItem.getCount() < 1) {
+                throw new CustomException("It cannot be so");
+            } else {
+                warehouseCostItem.setCount(costItem.getCount());
+            }
+            if (costItem.getPrice() < 1) {
+                throw new CustomException("It cannot be so");
+            } else {
+                warehouseCostItem.setPrice(costItem.getPrice());
+            }
+            if (costItem.getExpiryDate().isBefore(LocalDate.now())){
+                throw new CustomException("This product is not for sale");
+            }else {
+                warehouseCostItem.setExpiryDate(costItem.getExpiryDate());
+            }
 
-            warehouseCostItem.setCount(costItem.getCount());
-            warehouseCostItem.setPrice(costItem.getPrice());
+
+                warehouseCostItem.setPrice(costItem.getPrice());
             Product product = producteRepository.findById(costItem.getProductId())
                     .orElseThrow(() -> new CustomException("product not fount"));
 

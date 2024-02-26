@@ -7,9 +7,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDate;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,29 +15,22 @@ import java.util.List;
 @Entity
 public class WarehouseCostItem extends AbsClass {
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product_id;
 
+    @Column (nullable = false)
     private double count;
 
+    @Column (nullable = false)
     private double price;
-
 
     private LocalDate expiryDate;
 
-
-
-
-
     @ManyToOne
-    @JoinColumn(name = "warehouse_cost_id") // Ma'lumotlar bazasidagi qo'shimcha maydon nomi
+    @JoinColumn(name = "warehouse_cost_id")
     private WarehouseCost warehouseCost;
 
-
-//    @ManyToMany(mappedBy = "warehouseCostItems")
-//    private List<WarehouseCost> warehouseCosts = new ArrayList<>();
 
 
 }

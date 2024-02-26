@@ -13,7 +13,6 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -37,11 +36,24 @@ public class WarehouseOutputItemService extends GenericCrudService<WarehouseOutp
 
         WarehouseOutputItem warehouseOutputItem = new WarehouseOutputItem();
 
-        for (WarehouseOutputItemCreateDto costItem : createDto.getWarehouseOutputItemList()) {
+        for (WarehouseOutputItemCreateDto outputItem : createDto.getWarehouseOutputItemList()) {
 
-            warehouseOutputItem.setCount(costItem.getCount());
-            warehouseOutputItem.setProduct_price(costItem.getProduct_price());
-            Product product = producteRepository.findById(costItem.getProduct())
+            if (outputItem.getCount() < 1) {
+                throw new CustomException("It cannot be so");
+            } else {
+                warehouseOutputItem.setCount(outputItem.getCount());
+            }
+            if (outputItem.getProduct_price() < 1) {
+                throw new CustomException("It cannot be so");
+            } else {
+                warehouseOutputItem.setProduct_price(outputItem.getProduct_price());
+            }
+
+
+
+            warehouseOutputItem.setCount(outputItem.getCount());
+            warehouseOutputItem.setProduct_price(outputItem.getProduct_price());
+            Product product = producteRepository.findById(outputItem.getProduct())
                     .orElseThrow(() -> new CustomException("product not fount"));
 
             warehouseOutputItem.setProduct(product);

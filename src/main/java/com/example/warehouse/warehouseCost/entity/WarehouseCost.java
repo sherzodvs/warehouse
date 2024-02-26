@@ -27,7 +27,6 @@ public class WarehouseCost extends AbsClass {
     @JoinColumn(name = "warehouse_id")
     private Warehouse warehouse;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "taminotchi_id")
     private Taminotchi taminotchi;
@@ -36,12 +35,12 @@ public class WarehouseCost extends AbsClass {
     @JoinColumn(name = "currancyType_id")
     private CurrencyType currancyType;
 
-
     @OneToMany(mappedBy = "warehouseCost", cascade = CascadeType.ALL)
     private List<WarehouseCostItem> warehouseCostItemList = new ArrayList<>();
 
+    @NotBlank
+    @Column(nullable = false)
     private String costCode;
-
 
     private String invoiceNumber;
 
