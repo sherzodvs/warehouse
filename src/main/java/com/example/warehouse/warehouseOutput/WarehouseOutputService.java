@@ -39,7 +39,7 @@ public class WarehouseOutputService extends GenericCrudService<WarehouseOutput,L
 
     public WarehouseOutput saveCostWithItems(WarehouseOutputCreateDto output) {
         WarehouseOutput saved = save(output);
-        warehouseOutputItemService.save1(output);
+        warehouseOutputItemService.saveWarehouseOutputItems(output,saved);
         return saved;
     }
 
@@ -61,7 +61,6 @@ public class WarehouseOutputService extends GenericCrudService<WarehouseOutput,L
 
         omborChiqim.setCostCode(omborChiqimDto.getCostCode());
 
-       // warehouseOutputItem1.setWarehouseOutput(warehouseOutput);
 
         return repository.save(omborChiqim);
     }

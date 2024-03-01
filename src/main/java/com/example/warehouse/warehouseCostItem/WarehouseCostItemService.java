@@ -47,11 +47,7 @@ public class WarehouseCostItemService extends GenericCrudService<WarehouseCostIt
             warehouseCostItem.setCount(itemDto.getCount());
             warehouseCostItem.setPrice(itemDto.getPrice());
             warehouseCostItem.setExpiryDate(itemDto.getExpiryDate());
-           // warehouseCostItem.setWarehouseCost(warehouseCost);
-
-            // warehouse_cost_id ni saqlash
-//            warehouseCostItem.setWarehouseCostId(warehouseCost.getId());
-            warehouseCostItem.setWarehouseCost(warehouseCost);
+              warehouseCostItem.setWarehouseCost(warehouseCost);
 
             savedItems.add(repository.save(warehouseCostItem));
         }

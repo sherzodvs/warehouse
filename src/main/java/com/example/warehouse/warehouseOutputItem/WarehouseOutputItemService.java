@@ -4,6 +4,7 @@ import com.example.warehouse.common.exception.CustomException;
 import com.example.warehouse.common.service.GenericCrudService;
 import com.example.warehouse.product.ProducteRepository;
 import com.example.warehouse.product.entity.Product;
+import com.example.warehouse.warehouseCostItem.dto.WarehouseCostItemCreateDto;
 import com.example.warehouse.warehouseOutput.WarehouseOutputRepository;
 import com.example.warehouse.warehouseOutput.dto.WarehouseOutputCreateDto;
 import com.example.warehouse.warehouseOutput.entity.WarehouseOutput;
@@ -16,6 +17,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -61,6 +63,28 @@ public class WarehouseOutputItemService extends GenericCrudService<WarehouseOutp
         }
         return repository.save(warehouseOutputItem);
     }
+
+
+
+    public List<WarehouseOutputItem> saveWarehouseOutputItems(WarehouseOutputCreateDto itemsDto, WarehouseOutput warehouseOutput) {
+
+        List<WarehouseOutputItem> savedItems = new ArrayList<>();
+        for (WarehouseOutputItemCreateDto itemDto : itemsDto.getWarehouseOutputItemList()) {
+
+            WarehouseOutputItem warehouseOutputItem = new WarehouseOutputItem();
+            warehouseOutputItem.setProduct(producteRepository.findById(itemDto.getProduct())
+                    .orElseThrow(() -> new CustomException("Product not found")));
+            warehouseOutputItem.setCount(itemDto.getCount());
+            warehouseOutputItem.setProduct_price(itemDto.getProduct_price());
+            warehouseOutputItem.setWarehouseOutput(warehouseOutput);
+            savedItems.add(repository.save(warehouseOutputItem));
+
+        }
+
+        return savedItems;
+    }
+
+
 
 
     @Override
