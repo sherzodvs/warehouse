@@ -33,10 +33,6 @@ public class WarehouseCostItemService extends GenericCrudService<WarehouseCostIt
 
 
 
-
-
-
-
     public List<WarehouseCostItem> saveWarehouseCostItems(WarehouseCostCreateDto itemsDto, WarehouseCost warehouseCost) {
 
         List<WarehouseCostItem> savedItems = new ArrayList<>();
@@ -69,13 +65,25 @@ public class WarehouseCostItemService extends GenericCrudService<WarehouseCostIt
     }
 
 
+//    public List<WarehouseCostItem> calculateTotalSumByDate(LocalDate date) {
+//        // List<WarehouseCostItem> items = repository.findAllByCreatedAt(date);
+////        double totalSum = 0.0;
+////
+////        for (WarehouseCostItem item : items) {
+////            totalSum += item.getPrice() * item.getCount();
+////        }
+//        return  repository.findAllByCreatedAt(date);
+//    }
 
 
 
 
-
-
-
+    public long getCountOfProductsExpiringSoon() {
+        LocalDate currentDate = LocalDate.now();
+        LocalDate expirationDateThreshold = currentDate.plusDays(10);
+        List<WarehouseCostItem> items = repository.findAllByExpiryDateBefore(expirationDateThreshold);
+        return items.size();
+    }
 
 
 
@@ -95,9 +103,6 @@ public class WarehouseCostItemService extends GenericCrudService<WarehouseCostIt
     }
 
 
-//    public List<WarehouseCostItemDto> getWarehouseCostItemsForDay(LocalDate date) {
-//        return costRepository.findByDate(date);
-//    }
 
 
 }

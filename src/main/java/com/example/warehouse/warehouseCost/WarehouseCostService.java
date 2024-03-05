@@ -108,6 +108,14 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
         return dto;
 
     }
+
+
+
+
+
+
+
+
 // Kunlik cost  bo’lgan mahsulotlar (qiymati, umumiy summasi)
 
 //

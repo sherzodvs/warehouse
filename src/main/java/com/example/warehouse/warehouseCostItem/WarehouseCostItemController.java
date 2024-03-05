@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.time.LocalDate;
 
 @RestController
@@ -28,6 +29,8 @@ public class WarehouseCostItemController {
         Page<WarehouseCostItemResponseDto> all = warehouseCostItemService.getAll(pageable, predicate);
         return ResponseEntity.ok(all);
     }
+
+
 
     @GetMapping("/total-sum")
     public ResponseEntity<Double> getTotalSumByDate(
