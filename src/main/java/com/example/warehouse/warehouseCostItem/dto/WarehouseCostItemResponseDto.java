@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 public class WarehouseCostItemResponseDto extends AbsClass {
     private String productName;
     private double count;
-    private double totalSum;
     private double price;
 
 

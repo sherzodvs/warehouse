@@ -9,12 +9,10 @@ import com.example.warehouse.warehouseCost.entity.WarehouseCost;
 import com.example.warehouse.warehouseCostItem.dto.WarehouseCostItemCreateDto;
 import com.example.warehouse.warehouseCostItem.dto.WarehouseCostItemResponseDto;
 import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
-import com.example.warehouse.warehouseCostItem.dto.WarehouseCostItemDto;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +41,7 @@ public class WarehouseCostItemService extends GenericCrudService<WarehouseCostIt
         for (WarehouseCostItemCreateDto itemDto : itemsDto.getWarehouseCostItems()) {
 
             WarehouseCostItem warehouseCostItem = new WarehouseCostItem();
-            warehouseCostItem.setProduct_id(producteRepository.findById(itemDto.getProductId())
+            warehouseCostItem.setProduct_id(producteRepository.findById(itemDto.getProductName())
                     .orElseThrow(() -> new CustomException("Product not found")));
             warehouseCostItem.setCount(itemDto.getCount());
             warehouseCostItem.setPrice(itemDto.getPrice());
