@@ -8,8 +8,5 @@ import java.time.LocalDate;
 import java.util.List;
 @Repository
 public interface WarehouseCostRepository extends GenericSpecificationRepository<WarehouseCost,Long> {
-//    List<WarehouseCostItemDto> findByDate(LocalDate date);
-//
-//    WarehouseCost findByCostCode(String costCode);
 
 }
