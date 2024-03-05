@@ -13,6 +13,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +58,15 @@ public class WarehouseCostItemService extends GenericCrudService<WarehouseCostIt
 
 
 
+    public double calculateTotalSumByDate(LocalDate date) {
+        List<WarehouseCostItem> items = repository.findAllByCreatedAt(date);
+        double totalSum = 0.0;
+
+        for (WarehouseCostItem item : items) {
+            totalSum += item.getPrice() * item.getCount();
+        }
+        return totalSum;
+    }
 
 
 
@@ -71,42 +82,6 @@ public class WarehouseCostItemService extends GenericCrudService<WarehouseCostIt
 
 
 
-
-//    public WarehouseCostItem save(WarehouseCostCreateDto createDto) {
-//        WarehouseCostItem warehouseCostItem = new WarehouseCostItem();
-//
-//        for (WarehouseCostItemCreateDto costItem : createDto.getWarehouseCostItems()) {
-//            if (costItem.getCount() < 1) {
-//                throw new CustomException("It cannot be so");
-//            } else {
-//                warehouseCostItem.setCount(costItem.getCount());
-//            }
-//            if (costItem.getPrice() < 1) {
-//                throw new CustomException("It cannot be so");
-//            } else {
-//                warehouseCostItem.setPrice(costItem.getPrice());
-//            }
-//            if (costItem.getExpiryDate().isBefore(LocalDate.now())){
-//                throw new CustomException("This product is not for sale");
-//            }else {
-//                warehouseCostItem.setExpiryDate(costItem.getExpiryDate());
-//            }
-//
-//
-//                warehouseCostItem.setPrice(costItem.getPrice());
-//            Product product = producteRepository.findById(costItem.getProductId())
-//                    .orElseThrow(() -> new CustomException("product not fount"));
-//
-//            warehouseCostItem.setProduct_id(product);
-//
-//       //     warehouseCostItem.setWarehouseCost(warehouseCost);  // warehouseCost ga bog'lang
-//
-//            return repository.save(warehouseCostItem);
-//        }
-//        return repository.save(warehouseCostItem);
-//
-//    }
-//
 
     @Override
     protected WarehouseCostItem save(WarehouseCostItemCreateDto warehouseCostItemCreateDto) {

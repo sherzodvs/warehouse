@@ -86,7 +86,7 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
 
             return new CostDto(taminotchiName, currencyTypeName, warehouseName, costCode, warehouseCostItemList);
         } else {
-            throw new CustomException("Bunday bolishi mumkin emas");
+            throw new CustomException("This cannot be");
         }
     }
 
@@ -108,7 +108,7 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
         return dto;
 
     }
-
+// Kunlik cost  bo’lgan mahsulotlar (qiymati, umumiy summasi)
 
 //
 // public CostDto getWarehouseCostDtoByCost(String cost) {

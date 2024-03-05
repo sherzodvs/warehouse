@@ -38,6 +38,7 @@ public class WarehouseCostController {
     }
 
 
+
 //
 //  @GetMapping("/{cost}")
 //    public ResponseEntity<CostDto> getByCost(@PathVariable String cost) {
@@ -49,6 +50,29 @@ public class WarehouseCostController {
 //            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //        }
 //    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

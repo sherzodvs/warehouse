@@ -2,8 +2,6 @@ package com.example.warehouse.warehouseCostItem;
 
 import com.example.warehouse.common.repository.GenericSpecificationRepository;
 import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
-import com.example.warehouse.warehouseCostItem.dto.WarehouseCostItemDto;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
@@ -15,5 +13,8 @@ public interface WarehouseCostItemRepository extends GenericSpecificationReposit
 
 //    @Query("SELECT pe FROM WarehouseCostItem pe WHERE pe.createdAt = :today")
 //    List<WarehouseCostItemDto> findByWarehouseCost_Date(@Param("today") LocalDate today);
+//List<WarehouseCostItem> findByDate(@Param("date") LocalDate date);
 
+
+    List<WarehouseCostItem> findAllByCreatedAt(@Param("date") LocalDate date);
 }
