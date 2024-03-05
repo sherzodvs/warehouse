@@ -1,6 +1,6 @@
 package com.example.warehouse.warehouseCost.dto;
 
-import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
+import com.example.warehouse.warehouseCostItem.dto.WarehouseCostItemDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,11 +11,9 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class CostDto {
-    private String warehouseName;
     private String taminotchiName;
     private String currencyTypeName;
+    private String warehouseName;
     private String costCode;
-    private List<WarehouseCostItem> warehouseCostItemList;
-
-
+    private List<WarehouseCostItemDto> warehouseCostItemList;
 }

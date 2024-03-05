@@ -15,7 +15,6 @@ import java.util.List;
 public class WarehouseOutputCreateDto {
     private LocalDate date;
     private Long warehouseId;
-
     private List<WarehouseOutputItemCreateDto> warehouseOutputItemList;
     private Long currencyTypeId;
     private String costCode;

@@ -13,6 +13,7 @@ import com.example.warehouse.warehouseCost.dto.*;
 import com.example.warehouse.warehouseCost.entity.WarehouseCost;
 import com.example.warehouse.warehouseCostItem.WarehouseCostItemRepository;
 import com.example.warehouse.warehouseCostItem.WarehouseCostItemService;
+import com.example.warehouse.warehouseCostItem.dto.WarehouseCostItemDto;
 import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
 import jakarta.transaction.Transactional;
 import lombok.Getter;
@@ -59,7 +60,7 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
                 .orElseThrow(() -> new CustomException("taminotchi not fount"));
         warehouseCost.setTaminotchi(taminotchi);
 
-        CurrencyType currencyType = currancyTypeRepository.findById(warehouseCostCreateDto.getCurrencyTypeId())
+        CurrencyType currencyType = currancyTypeRepository.findById(warehouseCostCreateDto.getCurrencyType())
                 .orElseThrow(() -> new CustomException("currency Type not fount"));
         warehouseCost.setCurrancyType(currencyType);
 
@@ -70,31 +71,46 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
     }
 
 
+
+
+
     public CostDto getWarehouseCostDtoById(Long id) {
         WarehouseCost warehouseCost = repository.findById(id).orElse(null);
+
         if (warehouseCost != null) {
             String taminotchiName = warehouseCost.getTaminotchi().getName();
-            String currancyTypeName = warehouseCost.getCurrancyType().getName();
+            String currencyTypeName = warehouseCost.getCurrancyType().getName();
             String warehouseName = warehouseCost.getWarehouse().getName();
             String costCode = warehouseCost.getCostCode();
-            List<WarehouseCostItem> warehouseCostItemList = warehouseCost.getWarehouseCostItemList();
-            for (WarehouseCostItem warehouseCostItem : warehouseCostItemList) {
-                System.out.println( "Natija ------"+warehouseCostItem.getPrice());
-            }
-            return new CostDto(taminotchiName, currancyTypeName, warehouseName, costCode, warehouseCostItemList);
+            List<WarehouseCostItemDto> warehouseCostItemList = convertToDtoList(warehouseCost.getWarehouseCostItemList());
+
+            return new CostDto(taminotchiName, currencyTypeName, warehouseName, costCode, warehouseCostItemList);
         } else {
-            throw new CustomException("bunday bolishi mumkin emas");
+            throw new CustomException("Bunday bolishi mumkin emas");
         }
     }
 
+    private List<WarehouseCostItemDto> convertToDtoList(List<WarehouseCostItem> items) {
+         List<WarehouseCostItemDto> dtoList = new ArrayList<>();
+        for (WarehouseCostItem item : items) {
+            WarehouseCostItemDto warehouseCostItemDto = convertToDto(item);
+            dtoList.add(warehouseCostItemDto);
+        }
+        return dtoList;
+    }
+
+    private WarehouseCostItemDto convertToDto(WarehouseCostItem item) {
+        WarehouseCostItemDto dto = new WarehouseCostItemDto();
+        dto.setPrice(item.getPrice());
+        dto.setCount(item.getCount());
+        dto.setExpiryDate(item.getExpiryDate());
+        dto.setProduct_id(String.valueOf(item.getProduct_id()));
+        return dto;
+
+    }
 
 
-
-
-
-
-
-
+//
 // public CostDto getWarehouseCostDtoByCost(String cost) {
 //        WarehouseCost warehouseCost = repository.findByCostCode(cost);
 //        if (warehouseCost != null) {
@@ -110,23 +126,20 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
 //    }
 
 
-
-
-
-
-@Override
-protected WarehouseCost updateEntity(WarehouseCostUpdateDto updateDto,WarehouseCost warehouseCost){
-        mapper.update(updateDto,warehouseCost);
-        return repository.save(warehouseCost);
+        @Override
+        protected WarehouseCost updateEntity (WarehouseCostUpdateDto updateDto, WarehouseCost warehouseCost){
+            mapper.update(updateDto, warehouseCost);
+            return repository.save(warehouseCost);
         }
 
 
-public static String generateInvoiceNumber(){
-        SimpleDateFormat dateFormat=new SimpleDateFormat("Mdd");
-        String currentDate=dateFormat.format(new Date());
-        int randomPart=new Random().nextInt(900)+100;
-        return currentDate+randomPart;
+        public static String generateInvoiceNumber () {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("Mdd");
+            String currentDate = dateFormat.format(new Date());
+            int randomPart = new Random().nextInt(900) + 100;
+            return currentDate + randomPart;
         }
 
-        }
+    }
+
 

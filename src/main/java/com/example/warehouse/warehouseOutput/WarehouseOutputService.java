@@ -57,10 +57,7 @@ public class WarehouseOutputService extends GenericCrudService<WarehouseOutput,L
                 .orElseThrow(() -> new CustomException("currancyType not found"));
 
         omborChiqim.setCurrancyType(currancyType);
-
         omborChiqim.setCostCode(omborChiqimDto.getCostCode());
-
-
         return repository.save(omborChiqim);
     }
 

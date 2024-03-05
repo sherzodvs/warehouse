@@ -38,7 +38,7 @@ public class WarehouseCostController {
     }
 
 
-
+//
 //  @GetMapping("/{cost}")
 //    public ResponseEntity<CostDto> getByCost(@PathVariable String cost) {
 //        CostDto warehouseCostDto = service.getWarehouseCostDtoByCost(cost);

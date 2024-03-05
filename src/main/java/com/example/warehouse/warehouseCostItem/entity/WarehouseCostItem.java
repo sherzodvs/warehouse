@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 
 @AllArgsConstructor
@@ -19,7 +20,7 @@ public class WarehouseCostItem extends AbsClass {
     @JoinColumn(name = "product_id")
     private Product product_id;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private double count;
 
     @Column (nullable = false)

@@ -16,9 +16,9 @@ public class WarehouseCostCreateDto {
     private Long warehouseId;
     private Long taminotchiId;
     private Long  currencyType;
-    private List<WarehouseCostItemCreateDto> warehouseCostItems;
-    private Long currencyTypeId;
     private String costCode;
+    private List<WarehouseCostItemCreateDto> warehouseCostItems;
+
 
 
 

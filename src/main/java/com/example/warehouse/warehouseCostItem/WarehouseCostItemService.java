@@ -9,6 +9,7 @@ import com.example.warehouse.warehouseCost.entity.WarehouseCost;
 import com.example.warehouse.warehouseCostItem.dto.WarehouseCostItemCreateDto;
 import com.example.warehouse.warehouseCostItem.dto.WarehouseCostItemResponseDto;
 import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
+import com.example.warehouse.warehouseCostItem.dto.WarehouseCostItemDto;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -115,14 +116,15 @@ public class WarehouseCostItemService extends GenericCrudService<WarehouseCostIt
     }
 
     @Override
-    protected WarehouseCostItem updateEntity(WarehouseCostItem warehouseCostItem, WarehouseCostItem warehouseCostItem1) {
-        mapper.update(warehouseCostItem, warehouseCostItem1);
+    protected WarehouseCostItem updateEntity(WarehouseCostItem warehouseCostItem, WarehouseCostItem warehouseCostItem2) {
+        mapper.update(warehouseCostItem, warehouseCostItem2);
         return repository.save(warehouseCostItem);
     }
 
-    public List<WarehouseCostItem> getWarehouseCostItemsForDay(LocalDate date) {
-        return costRepository.findByDate(date);
-    }
+
+//    public List<WarehouseCostItemDto> getWarehouseCostItemsForDay(LocalDate date) {
+//        return costRepository.findByDate(date);
+//    }
 
 
 }
