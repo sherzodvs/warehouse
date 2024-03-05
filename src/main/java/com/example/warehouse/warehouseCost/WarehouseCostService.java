@@ -13,13 +13,15 @@ import com.example.warehouse.warehouseCost.dto.*;
 import com.example.warehouse.warehouseCost.entity.WarehouseCost;
 import com.example.warehouse.warehouseCostItem.WarehouseCostItemRepository;
 import com.example.warehouse.warehouseCostItem.WarehouseCostItemService;
-import com.example.warehouse.warehouseCostItem.dto.WarehouseCostItemCreateDto;
+import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
 import jakarta.transaction.Transactional;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Date;
 
 @Service
 @Getter
@@ -36,10 +38,10 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
     private final CurrancyTypeRepository currancyTypeRepository;
     private final WarehouseCostItemService costItemService;
 
-@Transactional
+    @Transactional
     public WarehouseCost saveCostWithItems(WarehouseCostCreateDto cost) {
         WarehouseCost savedCost = save(cost);
-        costItemService.saveWarehouseCostItems(cost,savedCost);
+        costItemService.saveWarehouseCostItems(cost, savedCost);
         return savedCost;
     }
 
@@ -64,37 +66,67 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
         warehouseCost.setInvoiceNumber("Generated Invoice Number: " + generateInvoiceNumber());
         warehouseCost.setCostCode(warehouseCostCreateDto.getCostCode());
 
-
         return repository.save(warehouseCost);
     }
 
 
-
-
-    public WarehouseCost getByCostCode(String costCode) {
-        return repository.findByCostCode(costCode);
-
+    public CostDto getWarehouseCostDtoById(Long id) {
+        WarehouseCost warehouseCost = repository.findById(id).orElse(null);
+        if (warehouseCost != null) {
+            String taminotchiName = warehouseCost.getTaminotchi().getName();
+            String currancyTypeName = warehouseCost.getCurrancyType().getName();
+            String warehouseName = warehouseCost.getWarehouse().getName();
+            String costCode = warehouseCost.getCostCode();
+            List<WarehouseCostItem> warehouseCostItemList = warehouseCost.getWarehouseCostItemList();
+            for (WarehouseCostItem warehouseCostItem : warehouseCostItemList) {
+                System.out.println( "Natija ------"+warehouseCostItem.getPrice());
+            }
+            return new CostDto(taminotchiName, currancyTypeName, warehouseName, costCode, warehouseCostItemList);
+        } else {
+            throw new CustomException("bunday bolishi mumkin emas");
+        }
     }
 
 
 
 
-    @Override
-    protected WarehouseCost updateEntity(WarehouseCostUpdateDto updateDto, WarehouseCost warehouseCost) {
-        mapper.update(updateDto, warehouseCost);
+
+
+
+
+
+// public CostDto getWarehouseCostDtoByCost(String cost) {
+//        WarehouseCost warehouseCost = repository.findByCostCode(cost);
+//        if (warehouseCost != null) {
+//            String taminotchiName = warehouseCost.getTaminotchi().getName();
+//            String currancyTypeName = warehouseCost.getCurrancyType().getName();
+//            String warehouseName = warehouseCost.getWarehouse().getName();
+//            String costCode = warehouseCost.getCostCode();
+//            List<WarehouseCostItem> warehouseCostItemList = warehouseCost.getWarehouseCostItemList();
+//            return new CostDto(taminotchiName, currancyTypeName, warehouseName, costCode, warehouseCostItemList);
+//        } else {
+//            return null;
+//        }
+//    }
+
+
+
+
+
+
+@Override
+protected WarehouseCost updateEntity(WarehouseCostUpdateDto updateDto,WarehouseCost warehouseCost){
+        mapper.update(updateDto,warehouseCost);
         return repository.save(warehouseCost);
-    }
+        }
 
 
+public static String generateInvoiceNumber(){
+        SimpleDateFormat dateFormat=new SimpleDateFormat("Mdd");
+        String currentDate=dateFormat.format(new Date());
+        int randomPart=new Random().nextInt(900)+100;
+        return currentDate+randomPart;
+        }
 
-
-
-    public static String generateInvoiceNumber() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("Mdd");
-        String currentDate = dateFormat.format(new Date());
-        int randomPart = new Random().nextInt(900) + 100;
-        return currentDate + randomPart;
-    }
-
-}
+        }
 

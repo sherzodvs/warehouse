@@ -7,19 +7,18 @@ import com.example.warehouse.currancyType.entity.CurrencyType;
 import com.example.warehouse.product.ProducteRepository;
 import com.example.warehouse.warehouse.WarehouseRepository;
 import com.example.warehouse.warehouse.entity.Warehouse;
-import com.example.warehouse.warehouseOutput.dto.WarehouseOutputCreateDto;
-import com.example.warehouse.warehouseOutput.dto.WarehouseOutputPatchDto;
-import com.example.warehouse.warehouseOutput.dto.WarehouseOutputResponseDto;
-import com.example.warehouse.warehouseOutput.dto.WarehouseOutputUpdateDto;
+import com.example.warehouse.warehouseOutput.dto.*;
 import com.example.warehouse.warehouseOutput.entity.WarehouseOutput;
 import com.example.warehouse.warehouseOutputItem.WarehouseOutItemRepository;
 import com.example.warehouse.warehouseOutputItem.WarehouseOutputItemService;
+import com.example.warehouse.warehouseOutputItem.entity.WarehouseOutputItem;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 @Service
@@ -64,6 +63,21 @@ public class WarehouseOutputService extends GenericCrudService<WarehouseOutput,L
 
         return repository.save(omborChiqim);
     }
+
+
+    public OutputDto getWarehouseOutById(Long id) {
+        WarehouseOutput warehouseOutput = repository.findById(id).orElse(null);
+        if (warehouseOutput != null) {
+            String currancyTypeName = warehouseOutput.getCurrancyType().getName();
+            String warehouseName = warehouseOutput.getWarehouse().getName();
+            String costCode = warehouseOutput.getCostCode();
+            List<WarehouseOutputItem> warehouseOutputItemList = warehouseOutput.getWarehouseOutputItemList();
+            return new OutputDto( currancyTypeName, warehouseName, costCode, warehouseOutputItemList);
+        } else {
+            return null;
+        }
+    }
+
 
     @Override
     protected WarehouseOutput updateEntity(WarehouseOutputUpdateDto updateDto, WarehouseOutput warehouseOutput) {

@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Entity
 public class WarehouseCostItem extends AbsClass {
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product_id;
 
@@ -26,9 +26,6 @@ public class WarehouseCostItem extends AbsClass {
     private double price;
 
     private LocalDate expiryDate;
-
-//    @Transient
-//    private Long warehouseCostId;  // Transient deb qo'shilgan
 
     @ManyToOne
     @JoinColumn(name = "warehouse_cost_id", nullable = false)

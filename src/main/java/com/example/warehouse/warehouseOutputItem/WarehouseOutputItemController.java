@@ -27,11 +27,12 @@ public class WarehouseOutputItemController {
         Page<WarehouseOutputItemResponseDto> all = warehouseOutputItemService.getAll(pageable, predicate);
         return ResponseEntity.ok(all);
     }
-    @GetMapping("top-selling")
-    public List<Product> getTopSellingProductsForDayOut1(@RequestParam ("date")  @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
-        List<Product> topSellingProductsForDayOut = warehouseOutputItemService.getTopSellingProductsForDayOut(date);
-        return ResponseEntity.ok(topSellingProductsForDayOut).getBody();
-    }
+//
+//    @GetMapping("top-selling")
+//    public List<Product> getTopSellingProductsForDayOut1(@RequestParam ("date")  @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
+//        List<Product> topSellingProductsForDayOut = warehouseOutputItemService.getTopSellingProductsForDayOut(date);
+//        return ResponseEntity.ok(topSellingProductsForDayOut).getBody();
+//    }
 
 
 

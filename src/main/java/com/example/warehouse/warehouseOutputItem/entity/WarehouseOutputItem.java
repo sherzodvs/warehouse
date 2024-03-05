@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class WarehouseOutputItem extends AbsClass {
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product;
 
@@ -22,7 +22,7 @@ public class WarehouseOutputItem extends AbsClass {
     @Column (nullable = false)
     private double product_price;
 
-    @ManyToOne (fetch = FetchType.EAGER)
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "warehouse_output_id")
     private WarehouseOutput warehouseOutput;
 
