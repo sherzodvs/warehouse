@@ -19,6 +19,7 @@ import jakarta.transaction.Transactional;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Date;
@@ -71,9 +72,6 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
     }
 
 
-
-
-
     public CostDto getWarehouseCostDtoById(Long id) {
         WarehouseCost warehouseCost = repository.findById(id).orElse(null);
 
@@ -90,8 +88,9 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
         }
     }
 
+
     private List<WarehouseCostItemDto> convertToDtoList(List<WarehouseCostItem> items) {
-         List<WarehouseCostItemDto> dtoList = new ArrayList<>();
+        List<WarehouseCostItemDto> dtoList = new ArrayList<>();
         for (WarehouseCostItem item : items) {
             WarehouseCostItemDto warehouseCostItemDto = convertToDto(item);
             dtoList.add(warehouseCostItemDto);
@@ -99,21 +98,16 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
         return dtoList;
     }
 
+
     private WarehouseCostItemDto convertToDto(WarehouseCostItem item) {
         WarehouseCostItemDto dto = new WarehouseCostItemDto();
         dto.setPrice(item.getPrice());
         dto.setCount(item.getCount());
         dto.setExpiryDate(item.getExpiryDate());
-        dto.setProduct_id(String.valueOf(item.getProduct_id()));
+        dto.setProduct_id((item.getProduct_id().getId()));
         return dto;
 
     }
-
-
-
-
-
-
 
 
 // Kunlik cost  bo’lgan mahsulotlar (qiymati, umumiy summasi)
@@ -134,20 +128,20 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
 //    }
 
 
-        @Override
-        protected WarehouseCost updateEntity (WarehouseCostUpdateDto updateDto, WarehouseCost warehouseCost){
-            mapper.update(updateDto, warehouseCost);
-            return repository.save(warehouseCost);
-        }
-
-
-        public static String generateInvoiceNumber () {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("Mdd");
-            String currentDate = dateFormat.format(new Date());
-            int randomPart = new Random().nextInt(900) + 100;
-            return currentDate + randomPart;
-        }
-
+    @Override
+    protected WarehouseCost updateEntity(WarehouseCostUpdateDto updateDto, WarehouseCost warehouseCost) {
+        mapper.update(updateDto, warehouseCost);
+        return repository.save(warehouseCost);
     }
+
+
+    public static String generateInvoiceNumber() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("Mdd");
+        String currentDate = dateFormat.format(new Date());
+        int randomPart = new Random().nextInt(900) + 100;
+        return currentDate + randomPart;
+    }
+
+}
 
 

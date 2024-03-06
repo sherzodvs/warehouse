@@ -5,14 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.time.LocalDate;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/warehouseCostItem")
@@ -31,12 +25,17 @@ public class WarehouseCostItemController {
     }
 
 
-
-    @GetMapping("/total-sum")
-    public ResponseEntity<Double> getTotalSumByDate(
-            @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-        double totalSum = warehouseCostItemService.calculateTotalSumByDate(date);
-        return ResponseEntity.ok(totalSum);
+    @GetMapping("/daily-total-price")
+    public Double calculateDailyTotalPrice() {
+        return warehouseCostItemService.calculateDailyTotalPrice();
     }
+
+
+    @GetMapping("/sum-expired-item-count")
+    public Double getSumExpiredItemCount() {
+        return warehouseCostItemService.sumExpiredItemCount();
+    }
+
+
 
 }

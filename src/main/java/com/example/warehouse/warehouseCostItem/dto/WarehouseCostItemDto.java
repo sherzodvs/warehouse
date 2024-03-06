@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Data
 public class WarehouseCostItemDto {
 
-    private String product_id;
+    private Long product_id;
 
     private double count;
 

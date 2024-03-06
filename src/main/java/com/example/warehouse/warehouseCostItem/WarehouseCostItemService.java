@@ -54,42 +54,21 @@ public class WarehouseCostItemService extends GenericCrudService<WarehouseCostIt
 
 
 
-    public double calculateTotalSumByDate(LocalDate date) {
-        List<WarehouseCostItem> items = repository.findAllByCreatedAt(date);
-        double totalSum = 0.0;
-
-        for (WarehouseCostItem item : items) {
-            totalSum += item.getPrice() * item.getCount();
-        }
-        return totalSum;
-    }
-
-
-//    public List<WarehouseCostItem> calculateTotalSumByDate(LocalDate date) {
-//        // List<WarehouseCostItem> items = repository.findAllByCreatedAt(date);
-////        double totalSum = 0.0;
-////
-////        for (WarehouseCostItem item : items) {
-////            totalSum += item.getPrice() * item.getCount();
-////        }
-//        return  repository.findAllByCreatedAt(date);
-//    }
 
 
 
 
-    public long getCountOfProductsExpiringSoon() {
-        LocalDate currentDate = LocalDate.now();
-        LocalDate expirationDateThreshold = currentDate.plusDays(10);
-        List<WarehouseCostItem> items = repository.findAllByExpiryDateBefore(expirationDateThreshold);
-        return items.size();
+
+    public Double sumExpiredItemCount() {
+        return repository.sumExpiredItemCount();
     }
 
 
 
 
-
-
+    public Double calculateDailyTotalPrice() {
+        return repository.calculateDailyTotalPrice();
+    }
 
     @Override
     protected WarehouseCostItem save(WarehouseCostItemCreateDto warehouseCostItemCreateDto) {

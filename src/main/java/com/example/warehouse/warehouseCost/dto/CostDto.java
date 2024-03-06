@@ -10,7 +10,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CostDto {
+public class CostDto
+{
     private String taminotchiName;
     private String currencyTypeName;
     private String warehouseName;
