@@ -16,7 +16,7 @@ public class WarehouseOutputController {
 
     @GetMapping("/{id}")
     public ResponseEntity<OutputDto> getById(@PathVariable Long id) {
-        OutputDto warehouseCostDto = warehouseOutputService.getWarehouseOutById(id);
+        OutputDto warehouseCostDto = warehouseOutputService.getWarehouseOutputDtoById(id);
 
         if (warehouseCostDto != null) {
             return new ResponseEntity<>(warehouseCostDto, HttpStatus.OK);

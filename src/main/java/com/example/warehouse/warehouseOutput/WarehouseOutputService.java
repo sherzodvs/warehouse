@@ -11,12 +11,14 @@ import com.example.warehouse.warehouseOutput.dto.*;
 import com.example.warehouse.warehouseOutput.entity.WarehouseOutput;
 import com.example.warehouse.warehouseOutputItem.WarehouseOutItemRepository;
 import com.example.warehouse.warehouseOutputItem.WarehouseOutputItemService;
+import com.example.warehouse.warehouseOutputItem.dto.WarehouseOutputItemDto;
 import com.example.warehouse.warehouseOutputItem.entity.WarehouseOutputItem;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -62,20 +64,43 @@ public class WarehouseOutputService extends GenericCrudService<WarehouseOutput,L
     }
 
 
-    public OutputDto getWarehouseOutById(Long id) {
+
+
+
+
+    public OutputDto getWarehouseOutputDtoById(Long id) {
         WarehouseOutput warehouseOutput = repository.findById(id).orElse(null);
+
         if (warehouseOutput != null) {
-            String currancyTypeName = warehouseOutput.getCurrancyType().getName();
+            String currencyTypeName = warehouseOutput.getCurrancyType().getName();
             String warehouseName = warehouseOutput.getWarehouse().getName();
             String costCode = warehouseOutput.getCostCode();
-            List<WarehouseOutputItem> warehouseOutputItemList = warehouseOutput.getWarehouseOutputItemList();
-            return new OutputDto( currancyTypeName, warehouseName, costCode, warehouseOutputItemList);
+            List<WarehouseOutputItemDto> warehouseCostItemList = convertToDtoList(warehouseOutput.getWarehouseOutputItems());
+
+            return new OutputDto( currencyTypeName, warehouseName, costCode, warehouseCostItemList);
         } else {
-            return null;
+            throw new CustomException("This cannot be");
         }
     }
 
+    private List<WarehouseOutputItemDto> convertToDtoList(List<WarehouseOutputItem> items) {
+        List<WarehouseOutputItemDto> dtoList = new ArrayList<>();
+        for (WarehouseOutputItem item : items) {
+            WarehouseOutputItemDto warehouseOutputItemDto = convertToDto(item);
+            dtoList.add(warehouseOutputItemDto);
+        }
+        return dtoList;
+    }
 
+
+    private WarehouseOutputItemDto convertToDto(WarehouseOutputItem item) {
+        WarehouseOutputItemDto dto = new WarehouseOutputItemDto();
+        dto.setPrice(item.getProduct_price());
+        dto.setCount(item.getCount());
+        dto.setProduct_id((item.getProduct()).getId());
+        return dto;
+
+    }
     @Override
     protected WarehouseOutput updateEntity(WarehouseOutputUpdateDto updateDto, WarehouseOutput warehouseOutput) {
         mapper.update(updateDto, warehouseOutput);

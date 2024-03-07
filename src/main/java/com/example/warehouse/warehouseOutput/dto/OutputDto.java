@@ -1,5 +1,6 @@
 package com.example.warehouse.warehouseOutput.dto;
 
+import com.example.warehouse.warehouseOutputItem.dto.WarehouseOutputItemDto;
 import com.example.warehouse.warehouseOutputItem.entity.WarehouseOutputItem;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +15,7 @@ public class OutputDto {
     private String warehouseName;
     private String currencyTypeName;
     private String costCode;
-    private List<WarehouseOutputItem> warehouseOutputItemList;
+    private List<WarehouseOutputItemDto> warehouseOutputItemList;
 
 
 }
