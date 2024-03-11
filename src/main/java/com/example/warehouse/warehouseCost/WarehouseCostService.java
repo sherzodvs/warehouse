@@ -1,5 +1,4 @@
 package com.example.warehouse.warehouseCost;
-
 import com.example.warehouse.common.exception.CustomException;
 import com.example.warehouse.common.service.GenericCrudService;
 import com.example.warehouse.currancyType.CurrancyTypeRepository;
@@ -19,7 +18,6 @@ import jakarta.transaction.Transactional;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Date;
@@ -108,24 +106,6 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
         return dto;
 
     }
-
-
-// Kunlik cost  bo’lgan mahsulotlar (qiymati, umumiy summasi)
-
-//
-// public CostDto getWarehouseCostDtoByCost(String cost) {
-//        WarehouseCost warehouseCost = repository.findByCostCode(cost);
-//        if (warehouseCost != null) {
-//            String taminotchiName = warehouseCost.getTaminotchi().getName();
-//            String currancyTypeName = warehouseCost.getCurrancyType().getName();
-//            String warehouseName = warehouseCost.getWarehouse().getName();
-//            String costCode = warehouseCost.getCostCode();
-//            List<WarehouseCostItem> warehouseCostItemList = warehouseCost.getWarehouseCostItemList();
-//            return new CostDto(taminotchiName, currancyTypeName, warehouseName, costCode, warehouseCostItemList);
-//        } else {
-//            return null;
-//        }
-//    }
 
 
     @Override
