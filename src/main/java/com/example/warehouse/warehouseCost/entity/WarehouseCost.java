@@ -38,7 +38,7 @@ public class WarehouseCost extends AbsClass {
     private List<WarehouseCostItem> warehouseCostItemList = new ArrayList<>();
 
     @NotBlank
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String costCode;
 
     private String invoiceNumber;

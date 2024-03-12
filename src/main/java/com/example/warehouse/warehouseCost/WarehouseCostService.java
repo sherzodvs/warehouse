@@ -63,11 +63,51 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
                 .orElseThrow(() -> new CustomException("currency Type not fount"));
         warehouseCost.setCurrancyType(currencyType);
 
-        warehouseCost.setInvoiceNumber("Generated Invoice Number: " + generateInvoiceNumber());
+        warehouseCost.setInvoiceNumber( generateInvoiceNumber());
         warehouseCost.setCostCode(warehouseCostCreateDto.getCostCode());
 
         return repository.save(warehouseCost);
     }
+
+
+    public CostDto getWarehouseCostDtoByCostCode(String costCode) {
+        WarehouseCost warehouseCost = (WarehouseCost) repository.findByCostCode(costCode).orElse(null);
+
+        if (warehouseCost != null) {
+            String taminotchiName = warehouseCost.getTaminotchi().getName();
+            String currencyTypeName = warehouseCost.getCurrancyType().getName();
+            String warehouseName = warehouseCost.getWarehouse().getName();
+            String costCodeResult = warehouseCost.getCostCode();
+            List<WarehouseCostItemDto> warehouseCostItemList = convertToDtoList(warehouseCost.getWarehouseCostItemList());
+
+            return new CostDto(taminotchiName, currencyTypeName, warehouseName, costCodeResult, warehouseCostItemList);
+        } else {
+            throw new CustomException("This cannot be");
+        }
+    }
+
+
+    public CostDto getWarehouseCostDtoByInvoiceNumber(String invoiceNumber) {
+        WarehouseCost warehouseCost = (WarehouseCost) repository.findByInvoiceNumber(invoiceNumber).orElse(null);
+
+        if (warehouseCost != null) {
+            String taminotchiName = warehouseCost.getTaminotchi().getName();
+            String currencyTypeName = warehouseCost.getCurrancyType().getName();
+            String warehouseName = warehouseCost.getWarehouse().getName();
+            String costCode = warehouseCost.getCostCode();
+            List<WarehouseCostItemDto> warehouseCostItemList = convertToDtoList(warehouseCost.getWarehouseCostItemList());
+
+            return new CostDto(taminotchiName, currencyTypeName, warehouseName, costCode, warehouseCostItemList);
+        } else {
+            throw new CustomException("This cannot be");
+        }
+    }
+
+
+
+
+
+
 
 
     public CostDto getWarehouseCostDtoById(Long id) {

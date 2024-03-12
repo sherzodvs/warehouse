@@ -1,5 +1,6 @@
 package com.example.warehouse.warehouseCost;
 
+import com.example.warehouse.common.exception.CustomException;
 import com.example.warehouse.warehouseCost.dto.CostDto;
 import com.example.warehouse.warehouseCost.dto.WarehouseCostCreateDto;
 import com.example.warehouse.warehouseCost.entity.WarehouseCost;
@@ -25,6 +26,25 @@ public class WarehouseCostController {
     }
 
 
+    @GetMapping("{costCode}")
+    public ResponseEntity<CostDto> getWarehouseCostDtoByCostCode(@PathVariable String costCode) {
+        try {
+            CostDto costDto = service.getWarehouseCostDtoByInvoiceNumber(costCode);
+            return new ResponseEntity<>(costDto, HttpStatus.OK);
+        } catch (CustomException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/{invoiceNumber}")
+    public ResponseEntity<CostDto> getWarehouseCostDtoByInvoiceNumber(@PathVariable String invoiceNumber) {
+        try {
+            CostDto costDto = service.getWarehouseCostDtoByInvoiceNumber(invoiceNumber);
+            return new ResponseEntity<>(costDto, HttpStatus.OK);
+        } catch (CustomException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<CostDto> getById(@PathVariable Long id) {
@@ -36,45 +56,6 @@ public class WarehouseCostController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
-
-
-//
-//  @GetMapping("/{cost}")
-//    public ResponseEntity<CostDto> getByCost(@PathVariable String cost) {
-//        CostDto warehouseCostDto = service.getWarehouseCostDtoByCost(cost);
-//
-//        if (warehouseCostDto != null) {
-//            return new ResponseEntity<>(warehouseCostDto, HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
