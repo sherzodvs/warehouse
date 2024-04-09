@@ -19,16 +19,7 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI springOpenAPI() {
         return new OpenAPI()
-                .info(new Info()
-                        .title("Spring 6 Swagger 2 Annotation Example")
-                        .description("Spring 6 Swagger Simple Application")
-                        .version("${api.version}")
-                        .contact(new Contact()
-                                .name("DOOR HUB DEVELOPERS")
-                                .email("rikxsiboyevzaxa@gmail.com")
-                                .email("diyorbek2110@gmail.com")
-                                .email("mamadiyevsayyod5@gmail.com")
-                        )
+
                         .license(new License()
                                 .name("Apache 2.0")
                                 .url("http://springdoc.org"))
