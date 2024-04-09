@@ -1,24 +1,21 @@
 package com.example.warehouse.warehouseOutput.dto;
 
-import com.example.warehouse.warehouseOutputItem.dto.WarehouseOutputItemCreateDto;
+import com.example.warehouse.warehouseOutputItem.dto.WarehouseOutputItemDto;
 import com.example.warehouse.warehouseOutputItem.entity.WarehouseOutputItem;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class WarehouseOutputCreateDto {
-    private LocalDate date;
-    private Long warehouseId;
-    private Long currencyTypeId;
+public class OutputDto {
+    private String warehouseName;
+    private String currencyTypeName;
     private String costCode;
-    private List<WarehouseOutputItemCreateDto> warehouseOutputItemList;
-
+    private List<WarehouseOutputItemDto> warehouseOutputItemList;
 
 
 }

@@ -1,13 +1,13 @@
 package com.example.warehouse.warehouseCost;
 
+import com.example.warehouse.common.exception.CustomException;
+import com.example.warehouse.warehouseCost.dto.CostDto;
 import com.example.warehouse.warehouseCost.dto.WarehouseCostCreateDto;
-import com.example.warehouse.warehouseCost.dto.WarehouseCostResponseDto;
 import com.example.warehouse.warehouseCost.entity.WarehouseCost;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,39 +21,41 @@ public class WarehouseCostController {
 
     @PostMapping("/omborgaKirim")
     public ResponseEntity<WarehouseCost> create(@RequestBody @Valid WarehouseCostCreateDto createDto) {
-            WarehouseCost warehouseCostResponseDto = service.saveCostWithItems(createDto);
-            return ResponseEntity.ok(warehouseCostResponseDto);
+        WarehouseCost warehouseCostResponseDto = service.saveCostWithItems(createDto);
+        return ResponseEntity.ok(warehouseCostResponseDto);
     }
 
+
+    @GetMapping("{costCode}")
+    public ResponseEntity<CostDto> getWarehouseCostDtoByCostCode(@PathVariable String costCode) {
+        try {
+            CostDto costDto = service.getWarehouseCostDtoByInvoiceNumber(costCode);
+            return new ResponseEntity<>(costDto, HttpStatus.OK);
+        } catch (CustomException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/{invoiceNumber}")
+    public ResponseEntity<CostDto> getWarehouseCostDtoByInvoiceNumber(@PathVariable String invoiceNumber) {
+        try {
+            CostDto costDto = service.getWarehouseCostDtoByInvoiceNumber(invoiceNumber);
+            return new ResponseEntity<>(costDto, HttpStatus.OK);
+        } catch (CustomException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
     @GetMapping("/{id}")
-    public ResponseEntity<WarehouseCostResponseDto> getById(@PathVariable Long id) {
-        WarehouseCostResponseDto byId = service.getById(id);
+    public ResponseEntity<CostDto> getById(@PathVariable Long id) {
+        CostDto warehouseCostDto = service.getWarehouseCostDtoById(id);
 
-        if (byId == null) {
-            return ResponseEntity.notFound().build();
+        if (warehouseCostDto != null) {
+            return new ResponseEntity<>(warehouseCostDto, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.ok(byId);
     }
-
-
-
-
-//    @GetMapping("/costCode")
-//    public ResponseEntity<WarehouseCost> getByCostCode(@RequestParam String costCode) {
-//        WarehouseCost byCostCode = service.getByCostCode(costCode);
-//        return ResponseEntity.ok( byCostCode);
-//    }
-//
-//
-//
-//
-//    @GetMapping
-//    public ResponseEntity<Page<WarehouseCostResponseDto>> getAll(Pageable pageable, @RequestParam(required = false) String predicate) {
-//        Page<WarehouseCostResponseDto> all = service.getAll(pageable, predicate);
-//        return ResponseEntity.ok(all);
-//    }
-
 
 
 }

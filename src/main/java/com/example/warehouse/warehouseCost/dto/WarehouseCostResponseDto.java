@@ -3,8 +3,7 @@ package com.example.warehouse.warehouseCost.dto;
 import com.example.warehouse.common.abstractClass.AbsClass;
 import com.example.warehouse.taminotchi.entity.Taminotchi;
 import com.example.warehouse.warehouse.entity.Warehouse;
-import com.example.warehouse.warehouseCost.entity.WarehouseCost;
-import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
+import com.example.warehouse.warehouseCostItem.dto.WarehouseCostItemDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,7 +19,7 @@ public class WarehouseCostResponseDto extends AbsClass {
     private Warehouse warehouse;
     private Taminotchi taminotchi;
 
-    private List<WarehouseCostItem> warehouseCostItemList;
+    private List<WarehouseCostItemDto> warehouseCostItemList;
 
 
 }

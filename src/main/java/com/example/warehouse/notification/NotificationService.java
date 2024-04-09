@@ -1,6 +1,6 @@
 package com.example.warehouse.notification;
 
-import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
+import com.example.warehouse.warehouseCostItem.dto.WarehouseCostItemDto;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import java.time.LocalDate;
@@ -9,7 +9,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NotificationService {
-    private List<WarehouseCostItem> products;
+    private List<WarehouseCostItemDto> products;
     private List<Notification> notifications;
 
 

@@ -1,5 +1,4 @@
 package com.example.warehouse.warehouseCost;
-
 import com.example.warehouse.common.exception.CustomException;
 import com.example.warehouse.common.service.GenericCrudService;
 import com.example.warehouse.currancyType.CurrancyTypeRepository;
@@ -13,13 +12,15 @@ import com.example.warehouse.warehouseCost.dto.*;
 import com.example.warehouse.warehouseCost.entity.WarehouseCost;
 import com.example.warehouse.warehouseCostItem.WarehouseCostItemRepository;
 import com.example.warehouse.warehouseCostItem.WarehouseCostItemService;
-import com.example.warehouse.warehouseCostItem.dto.WarehouseCostItemCreateDto;
+import com.example.warehouse.warehouseCostItem.dto.WarehouseCostItemDto;
+import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
 import jakarta.transaction.Transactional;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Date;
 
 @Service
 @Getter
@@ -36,10 +37,11 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
     private final CurrancyTypeRepository currancyTypeRepository;
     private final WarehouseCostItemService costItemService;
 
-@Transactional
+
+    @Transactional
     public WarehouseCost saveCostWithItems(WarehouseCostCreateDto cost) {
         WarehouseCost savedCost = save(cost);
-        costItemService.saveWarehouseCostItems(cost,savedCost);
+        costItemService.saveWarehouseCostItems(cost, savedCost);
         return savedCost;
     }
 
@@ -57,26 +59,93 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
                 .orElseThrow(() -> new CustomException("taminotchi not fount"));
         warehouseCost.setTaminotchi(taminotchi);
 
-        CurrencyType currencyType = currancyTypeRepository.findById(warehouseCostCreateDto.getCurrencyTypeId())
+        CurrencyType currencyType = currancyTypeRepository.findById(warehouseCostCreateDto.getCurrencyType())
                 .orElseThrow(() -> new CustomException("currency Type not fount"));
         warehouseCost.setCurrancyType(currencyType);
 
-        warehouseCost.setInvoiceNumber("Generated Invoice Number: " + generateInvoiceNumber());
+        warehouseCost.setInvoiceNumber( generateInvoiceNumber());
         warehouseCost.setCostCode(warehouseCostCreateDto.getCostCode());
-
 
         return repository.save(warehouseCost);
     }
 
 
+    public CostDto getWarehouseCostDtoByCostCode(String costCode) {
+        WarehouseCost warehouseCost = (WarehouseCost) repository.findByCostCode(costCode).orElse(null);
 
+        if (warehouseCost != null) {
+            String taminotchiName = warehouseCost.getTaminotchi().getName();
+            String currencyTypeName = warehouseCost.getCurrancyType().getName();
+            String warehouseName = warehouseCost.getWarehouse().getName();
+            String costCodeResult = warehouseCost.getCostCode();
+            List<WarehouseCostItemDto> warehouseCostItemList = convertToDtoList(warehouseCost.getWarehouseCostItemList());
 
-    public WarehouseCost getByCostCode(String costCode) {
-        return repository.findByCostCode(costCode);
-
+            return new CostDto(taminotchiName, currencyTypeName, warehouseName, costCodeResult, warehouseCostItemList);
+        } else {
+            throw new CustomException("This cannot be");
+        }
     }
 
 
+    public CostDto getWarehouseCostDtoByInvoiceNumber(String invoiceNumber) {
+        WarehouseCost warehouseCost = (WarehouseCost) repository.findByInvoiceNumber(invoiceNumber).orElse(null);
+
+        if (warehouseCost != null) {
+            String taminotchiName = warehouseCost.getTaminotchi().getName();
+            String currencyTypeName = warehouseCost.getCurrancyType().getName();
+            String warehouseName = warehouseCost.getWarehouse().getName();
+            String costCode = warehouseCost.getCostCode();
+            List<WarehouseCostItemDto> warehouseCostItemList = convertToDtoList(warehouseCost.getWarehouseCostItemList());
+
+            return new CostDto(taminotchiName, currencyTypeName, warehouseName, costCode, warehouseCostItemList);
+        } else {
+            throw new CustomException("This cannot be");
+        }
+    }
+
+
+
+
+
+
+
+
+    public CostDto getWarehouseCostDtoById(Long id) {
+        WarehouseCost warehouseCost = repository.findById(id).orElse(null);
+
+        if (warehouseCost != null) {
+            String taminotchiName = warehouseCost.getTaminotchi().getName();
+            String currencyTypeName = warehouseCost.getCurrancyType().getName();
+            String warehouseName = warehouseCost.getWarehouse().getName();
+            String costCode = warehouseCost.getCostCode();
+            List<WarehouseCostItemDto> warehouseCostItemList = convertToDtoList(warehouseCost.getWarehouseCostItemList());
+
+            return new CostDto(taminotchiName, currencyTypeName, warehouseName, costCode, warehouseCostItemList);
+        } else {
+            throw new CustomException("This cannot be");
+        }
+    }
+
+
+    private List<WarehouseCostItemDto> convertToDtoList(List<WarehouseCostItem> items) {
+        List<WarehouseCostItemDto> dtoList = new ArrayList<>();
+        for (WarehouseCostItem item : items) {
+            WarehouseCostItemDto warehouseCostItemDto = convertToDto(item);
+            dtoList.add(warehouseCostItemDto);
+        }
+        return dtoList;
+    }
+
+
+    private WarehouseCostItemDto convertToDto(WarehouseCostItem item) {
+        WarehouseCostItemDto dto = new WarehouseCostItemDto();
+        dto.setPrice(item.getPrice());
+        dto.setCount(item.getCount());
+        dto.setExpiryDate(item.getExpiryDate());
+        dto.setProduct_id((item.getProduct_id().getId()));
+        return dto;
+
+    }
 
 
     @Override
@@ -84,9 +153,6 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
         mapper.update(updateDto, warehouseCost);
         return repository.save(warehouseCost);
     }
-
-
-
 
 
     public static String generateInvoiceNumber() {
@@ -97,4 +163,5 @@ public class WarehouseCostService extends GenericCrudService<WarehouseCost, Long
     }
 
 }
+
 

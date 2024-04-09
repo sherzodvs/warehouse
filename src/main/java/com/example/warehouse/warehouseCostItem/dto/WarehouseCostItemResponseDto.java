@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class WarehouseCostItemResponseDto extends AbsClass {
-    private Long id;
+    private String productName;
     private double count;
-
     private double price;
 
 

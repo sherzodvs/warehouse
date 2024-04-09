@@ -18,6 +18,5 @@ public class WarehouseOutputItemCreateDto {
     private double count;
 
     private double product_price;
-    private List<WarehouseOutputCreateDto> warehouseOutputCreateDtoList =new ArrayList<>();
 
 }

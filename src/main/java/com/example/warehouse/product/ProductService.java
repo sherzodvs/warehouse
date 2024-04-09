@@ -15,7 +15,7 @@ import com.example.warehouse.warehouseCost.WarehouseCostRepository;
 import com.example.warehouse.warehouseCost.WarehouseCostService;
 import com.example.warehouse.warehouseCostItem.WarehouseCostItemRepository;
 import com.example.warehouse.warehouseCostItem.WarehouseCostItemService;
-import com.example.warehouse.warehouseCostItem.entity.WarehouseCostItem;
+import com.example.warehouse.warehouseCostItem.dto.WarehouseCostItemDto;
 import com.example.warehouse.warehouseOutput.WarehouseOutputService;
 import com.example.warehouse.warehouseOutputItem.WarehouseOutItemRepository;
 import com.example.warehouse.warehouseOutputItem.WarehouseOutputItemService;
@@ -48,7 +48,7 @@ public class ProductService extends GenericCrudService<Product, Long, ProductCre
     private final UnitRepository unitRepository;
     private final CategoryRepository categoryRepository;
 
-    static List<WarehouseCostItem> warehouseCostItems;
+    static List<WarehouseCostItemDto> warehouseCostItems;
 
 
     @Override
@@ -91,7 +91,7 @@ public class ProductService extends GenericCrudService<Product, Long, ProductCre
     public int Product_ExpiryDate() {
         int soni = 0;
         LocalDate date = LocalDate.now();
-        for (WarehouseCostItem product : warehouseCostItems) {
+        for (WarehouseCostItemDto product : warehouseCostItems) {
             if (product.getExpiryDate().isAfter(date)) {
                 soni++;
             }
@@ -136,21 +136,21 @@ public class ProductService extends GenericCrudService<Product, Long, ProductCre
 
 
     //Kunlik eng ko’p krim qilingan mahsulotlar
-    public List<Product> getTopSellingProductsForDayCost(LocalDate date) {
-        List<WarehouseCostItem> costsForDay = warehouseCostItemService.getWarehouseCostItemsForDay(date);
-        return calculateTopSellingProductsCost(costsForDay);
-    }
+//    public List<Product> getTopSellingProductsForDayCost(LocalDate date) {
+//        List<WarehouseCostItemDto> costsForDay = warehouseCostItemService.getWarehouseCostItemsForDay(date);
+//        return calculateTopSellingProductsCost(costsForDay);
+//    }
 
-    private List<Product> calculateTopSellingProductsCost(List<WarehouseCostItem> costItems) {
-        Map<Product, Double> productQuantityMap = costItems.stream()
-                .collect(Collectors.groupingBy(WarehouseCostItem::getProduct_id,
-                        Collectors.summingDouble(WarehouseCostItem::getCount)));
-
-        return productQuantityMap.entrySet().stream()
-                .sorted(Map.Entry.<Product, Double>comparingByValue().reversed())
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
-    }
+//    private List<Product> calculateTopSellingProductsCost(List<WarehouseCostItemDto> costItems) {
+//        Map<Product, Double> productQuantityMap = costItems.stream()
+//                .collect(Collectors.groupingBy(WarehouseCostItemDto::getProduct_id,
+//                        Collectors.summingDouble(WarehouseCostItemDto::getCount)));
+//
+//        return productQuantityMap.entrySet().stream()
+//                .sorted(Map.Entry.<Product, Double>comparingByValue().reversed())
+//                .map(Map.Entry::getKey)
+//                .collect(Collectors.toList());
+//    }
 
 
 }

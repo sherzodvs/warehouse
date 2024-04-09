@@ -8,15 +8,16 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class WarehouseCostItemCreateDto
-{
-    private Long productName;
+public class WarehouseCostItemDto {
+
+    private Long product_id;
 
     private double count;
 
     private double price;
 
     private LocalDate expiryDate;
+
 
 
 }
